@@ -56,7 +56,7 @@ guam <-run_expalg() # load w/ defaults
 
 # Set "Exapansion" or "Species Composition" data frames as indvidual R data.tables
 guam_expansion <- guam$bb_exp
-guam_species <- guam$bb_sp
+guam_species <- guam$bb_spc
 
 # Write data.frames to file
 write.csv(guam_expansion, file="out_guam_exp.csv")
