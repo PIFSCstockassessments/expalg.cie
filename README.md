@@ -23,6 +23,20 @@ Run `run_expalg()` with the following parameters to execute the expansion algori
 |`start_year` | The first year of the expansion to run (earliest available year is 1982)  |
 |`end_year`   | The last year of the expansion to run (most recent available year is 2019)|
 
+### Data Tables
+
+`run_expalg()` contains all the methods necessary to run the Guam boat-based expansion algorithm. `run_expalg()` imports reads in eight CSV data files embedded in the installed package `extdata` subdirectory:
+
+- CIE_sample_days_all_years.csv
+- CIE_reference_raw.csv
+- CIE_iwc_allyears.csv
+- CIE_catch_raw.csv
+- CIE_interviews_raw_pub.csv
+- CIE_days_allyears.csv
+- CIE_p1_allyears_pub.csv
+- CIE_bl_allyears.csv
+
+
 ## Example 
 
 The package includes results from the Guam boat-based expansion representing total catch (`expalg.cie::g_bb_exp`) and catch by species (`expalg.cie::g_bb_spc`). The vignette _"Guam Boat Based Expansion Database Fields"_ describes the fields for the total catch and catch by species tables.
@@ -34,7 +48,7 @@ write.csv(expalg.cie::g_bb_exp, file="G_BB_EXP.csv")
 write.csv(expalg.cie::g_bb_spc, file="G_BB_SPC.csv")
 ```
 
-The main function wrapper `run_expalg.cie()` will return a list of two data frames, `bb_exp` (representing "expansion": the total catch for each estimation domain) and `bb_spc` (representing "species_composition": the total catch by species for each estimation domain). The data frames can be manipulated and output as desired. 
+The main function wrapper `run_expalg()` will return a list of two data frames, `bb_exp` (representing "expansion": the total catch for each estimation domain) and `bb_spc` (representing "species_composition": the total catch by species for each estimation domain). The data frames can be manipulated and output as desired. 
 
 ```r
 library(expalg.cie)
@@ -45,25 +59,9 @@ guam_expansion <- guam$bb_exp
 guam_species <- guam$bb_sp
 
 # Write data.frames to file
-write.csv(guam_expansion, file="G_BB_EXP.csv")
-write.csv(guam_species, file="G_BB_SPC.csv")
+write.csv(guam_expansion, file="out_guam_exp.csv")
+write.csv(guam_species, file="out_guam_spc.csv")
 ```
-
-
-## Data
-
-**expalg.cie** contains all the methods necessary to run the Guam boat-based expansion algorithm. Included are eight CSV data files:
-
-- CIE_sample_days_all_years.csv
-- CIE_reference_raw.csv
-- CIE_iwc_allyears.csv
-- CIE_catch_raw.csv
-- CIE_interviews_raw.csv
-- CIE_days_allyears.csv
-- CIE_p1_allyears.csv
-- CIE_bl_allyears.csv
-
-In addition, a Microsoft Word document vignette "guam BB mysql formulas.docx" describes Expansion and Species Composition output fields.
 
 
 

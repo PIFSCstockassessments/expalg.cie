@@ -137,7 +137,7 @@ run_expansion = function(year, pool_f, species) {
  # bl = inner_join(bl_head, bl_detail, by = c("BLHD_PK" = "BLHD_FK"))
   
  # Ma joined the two tables with MySQL in R and output the result as "data/CIE_bl_allyears.csv" 
-  bl = read.csv(system.file("extdata","CIE_bl_allyears.csv", package="expalg.cie"), stringsAsFactors = F)
+  bl = read.csv(system.file("extdata","CIE_bl_allyears_pub.csv", package="expalg.cie"), stringsAsFactors = F)
   bl_current_year = filter(bl, substr(bl$SAMPLE_DATE, 1, 4) == year)
   
   p1 = read.csv(system.file("extdata","CIE_p1_allyears.csv", package ="expalg.cie"), stringsAsFactors = F)
@@ -146,7 +146,7 @@ run_expansion = function(year, pool_f, species) {
   days = read.csv(system.file("extdata","CIE_days_allyears.csv", package ="expalg.cie"), stringsAsFactors = F)
   days_current_year = filter(days, days$YEAR == year)
   
-  interviews_raw = read.csv(system.file("extdata","CIE_interviews_raw.csv", package ="expalg.cie"), stringsAsFactors = F)
+  interviews_raw = read.csv(system.file("extdata","CIE_interviews_raw_pub.csv", package ="expalg.cie"), stringsAsFactors = F)
   interviews_raw = mutate(interviews_raw, YEAR = strtoi(substr(interviews_raw$SAMPLE_DATE, 1, 4)))
   catch_raw = read.csv(system.file("extdata","CIE_catch_raw.csv", package ="expalg.cie"), stringsAsFactors = F)
   # 6/23/20 added by TM
