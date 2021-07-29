@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Expansion Algorithm • expalg</title>
+<title>Expansion Algorithm • expalg.cie</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">expalg</a>
+        <a class="navbar-link" href="index.html">expalg.cie</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.2</span>
       </span>
     </div>
@@ -131,11 +131,11 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>The package includes results from the Guam boat-based expansion representing total catch (<code><a href="reference/g_bb_exp.html">expalg::g_bb_exp</a></code>) and catch by species (<code><a href="reference/g_bb_spc.html">expalg::g_bb_spc</a></code>). The vignette <em>“Guam Boat Based Expansion Database Fields”</em> describes the fields for the total catch and catch by species tables.</p>
+<p>The package includes results from the Guam boat-based expansion representing total catch (<code><a href="https://rdrr.io/pkg/expalg/man/g_bb_exp.html">expalg::g_bb_exp</a></code>) and catch by species (<code><a href="https://rdrr.io/pkg/expalg/man/g_bb_spc.html">expalg::g_bb_spc</a></code>). The vignette <em>“Guam Boat Based Expansion Database Fields”</em> describes the fields for the total catch and catch by species tables.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#Write R data object to csv</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="fu">expalg</span><span class="fu">::</span><span class="va"><a href="reference/g_bb_exp.html">g_bb_exp</a></span>, file<span class="op">=</span><span class="st">"G_BB_EXP.csv"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="fu">expalg</span><span class="fu">::</span><span class="va"><a href="reference/g_bb_spc.html">g_bb_spc</a></span>, file<span class="op">=</span><span class="st">"G_BB_SPC.csv"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="fu">expalg</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/expalg/man/g_bb_exp.html">g_bb_exp</a></span>, file<span class="op">=</span><span class="st">"G_BB_EXP.csv"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="fu">expalg</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/expalg/man/g_bb_spc.html">g_bb_spc</a></span>, file<span class="op">=</span><span class="st">"G_BB_SPC.csv"</span><span class="op">)</span></code></pre></div>
 <p>The main function wrapper <code><a href="reference/run_expalg.html">run_expalg()</a></code> will return a list of two data frames, <code>bb_exp</code> (representing “expansion”: the total catch for each estimation domain) and <code>bb_spc</code> (representing “species_composition”: the total catch by species for each estimation domain). The data frames can be manipulated and output as desired.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PIFSCstockassessments/expalg">expalg</a></span><span class="op">)</span>
@@ -149,10 +149,9 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">guam_expansion</span>, file<span class="op">=</span><span class="st">"G_BB_EXP.csv"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">guam_species</span>, file<span class="op">=</span><span class="st">"G_BB_SPC.csv"</span><span class="op">)</span></code></pre></div>
 </div>
-</div>
-<div id="data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#data" class="anchor"></a>Data</h1>
+<div id="data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data" class="anchor"></a>Data</h2>
 <p><strong>expalg</strong> contains all the methods necessary to run the Guam boat-based expansion algorithm. Included are eight CSV data files:</p>
 <ul>
 <li>CIE_sample_days_all_years.csv</li>
@@ -165,6 +164,7 @@
 <li>CIE_bl_allyears.csv</li>
 </ul>
 <p>In addition, a Microsoft Word document vignette “guam BB mysql formulas.docx” describes Expansion and Species Composition output fields.</p>
+</div>
 </div>
 <div id="github-disclaimer" class="section level1">
 <h1 class="hasAnchor">
