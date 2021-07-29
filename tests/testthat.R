@@ -1,4 +1,4 @@
 library(testthat)
-library(expalg)
+library(expalg.cie)
 
-test_check("expalg")
+test_check("expalg.cie")

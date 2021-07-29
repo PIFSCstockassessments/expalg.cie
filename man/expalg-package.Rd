@@ -2,8 +2,8 @@
 % Please edit documentation in R/expalg-package.R
 \docType{package}
 \name{expalg-package}
-\alias{expalg}
-\alias{expalg-package}
+\alias{expalg.cie}
+\alias{expalg.cie-package}
 \title{expalg: US Territorial Expansion Algorithm}
 \description{
 This package contains the methods to run the Guam boat-based expansion algorithm.
