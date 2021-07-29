@@ -1,13 +1,13 @@
-# expalg
+# expalg.cie
 
-Small-scale nearshore fisheries in the United States territories of Guam, the Commonwealth of the Northern Mariana Islands (CNMI), and American Samoa target reef, bottom, and nearshore pelagic species. These fisheries are of fundamental importance to subsistence fishers, critical in local cultural traditions, and provide a source of income and recreation to the local population. The R package **expalg** is used to estimate annual catch and effort from boat-based fishing surveys in Guam.
+Small-scale nearshore fisheries in the United States territories of Guam, the Commonwealth of the Northern Mariana Islands (CNMI), and American Samoa target reef, bottom, and nearshore pelagic species. These fisheries are of fundamental importance to subsistence fishers, critical in local cultural traditions, and provide a source of income and recreation to the local population. The R package **expalg.cie** is used to estimate annual catch and effort from boat-based fishing surveys in Guam.
 
-**expalg** also reproduces the case study presented in the NOAA Tech Memo _"Shore-based and boat-based fishing surveys in Guam, the CNMI, and American Samoa: Survey design, expansion algorithm, and a case study"_.
+**expalg.cie** also reproduces the case study presented in the NOAA Tech Memo _"Shore-based and boat-based fishing surveys in Guam, the CNMI, and American Samoa: Survey design, expansion algorithm, and a case study"_.
 
 # Package Installation
 ```r
 library(remotes)
-install_github("PIFSCstockassessments/expalg@*release") #Latest Release 
+install_github("PIFSCstockassessments/expalg.cie@*release") #Latest Release 
 ```
 
 # Usage 
@@ -25,19 +25,19 @@ Run `run_expalg()` with the following parameters to execute the expansion algori
 
 ## Example 
 
-The package includes results from the Guam boat-based expansion representing total catch (`expalg::g_bb_exp`) and catch by species (`expalg::g_bb_spc`). The vignette _"Guam Boat Based Expansion Database Fields"_ describes the fields for the total catch and catch by species tables.
+The package includes results from the Guam boat-based expansion representing total catch (`expalg.cie::g_bb_exp`) and catch by species (`expalg.cie::g_bb_spc`). The vignette _"Guam Boat Based Expansion Database Fields"_ describes the fields for the total catch and catch by species tables.
 
 
 ```r
 #Write R data object to csv
-write.csv(expalg::g_bb_exp, file="G_BB_EXP.csv")
-write.csv(expalg::g_bb_spc, file="G_BB_SPC.csv")
+write.csv(expalg.cie::g_bb_exp, file="G_BB_EXP.csv")
+write.csv(expalg.cie::g_bb_spc, file="G_BB_SPC.csv")
 ```
 
-The main function wrapper `run_expalg()` will return a list of two data frames, `bb_exp` (representing "expansion": the total catch for each estimation domain) and `bb_spc` (representing "species_composition": the total catch by species for each estimation domain). The data frames can be manipulated and output as desired. 
+The main function wrapper `run_expalg.cie()` will return a list of two data frames, `bb_exp` (representing "expansion": the total catch for each estimation domain) and `bb_spc` (representing "species_composition": the total catch by species for each estimation domain). The data frames can be manipulated and output as desired. 
 
 ```r
-library(expalg)
+library(expalg.cie)
 guam <-run_expalg() # load w/ defaults
 
 # Set "Exapansion" or "Species Composition" data frames as indvidual R data.tables
@@ -52,7 +52,7 @@ write.csv(guam_species, file="G_BB_SPC.csv")
 
 ## Data
 
-**expalg** contains all the methods necessary to run the Guam boat-based expansion algorithm. Included are eight CSV data files:
+**expalg.cie** contains all the methods necessary to run the Guam boat-based expansion algorithm. Included are eight CSV data files:
 
 - CIE_sample_days_all_years.csv
 - CIE_reference_raw.csv
