@@ -1,0 +1,7 @@
+pandoc: '2.13'
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  GuamBB_DBFields_Formulas: GuamBB_DBFields_Formulas.html
+last_built: 2021-07-28T20:50Z
+

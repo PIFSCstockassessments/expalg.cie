@@ -1,0 +1,725 @@
+---
+title: "Guam Boat Based Expansion Database Fields"
+author: "Author"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette: default
+  pdf_document: default
+vignette: >
+  %\VignetteIndexEntry{Guam Boat Based Expansion Database Fields}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Intro 
+
+Expansion results are stored in the MySQL database tables `G_BBS_EXP` and `G_BBS_SPC`. `G_BBS_EXP` has fields describing the expansion domain, available data, and expanded values. `G_BBS_SPC` has fields describing the catch and market activity for individual species. Following are short descriptions of each field, along with the formulas used to compute the fields when applicable. Expansion strata are specified by `YEAR`, `TYPE_OF_DAY`, `FISHERY_TYPE`, `PORT_FK` or `SURVEY_ZONE_FK`, and `METHOD_FK`. In the formulas, the following variables are used:
+
+
+| Description                                                                           | Variable | Range  |
+|---------------------------------------------------------------------------------------|----------|--------|
+| Boat log sample day for current domain                                                | d        | [1,D]  |
+| Boat log entry for current domain from `G_BBS_BLDT`                                   | b        | [1,B]  |
+| Trailer count entry for current domain from `G_BBS_IWC`                               | t        | [1,T]  |
+| Interview for current domain from `G_BBS_INT`. Any pooled interviews are included     | i        | [1,I]  |
+| Species catch entry fo the current species in the current domain from `G_BBS_CATCH`   | c        | [1,C]  |
+| Species caught in the current domain                                                  | s        | [1,S]  |
+
+
+---
+
+# Fields in G_BBS_EXP
+
+
+
+## `EXP_PK`
+
+The private key associated with a particular domain expansion. Consists of 18 characters of the form `PyyyyqqmmmmsssDDCP`, determined as:
+
+* `P`: A single capital letter for [`PERIOD_TYPE`](#period_type)
+* `yyyy`: The four digits for [`YEAR`](#year)
+* `qq`: Two digits for [`QUARTER`](#quarter), with leading zeros if necessary
+* `mmmm`: Four digits for [`METHOD_FK`](#method_fk), with leading zeros if necessary
+* `sss`: Three digits for [`SURVEY_ZONE_FK`](#survey_zone_fk), with leading zeros if necessary
+* `DD`: Two capital letters for [`TYPE_OF_DAY`](#type_of_day)
+* `C`: A single capital letter for [`FISHERY_TYPE`](#fishery_type)
+* `P`: A single letter for [`PROCESS_TYPE`](#process_type)
+
+## `PERIOD_TYPE`
+
+The time span of the expansion, with the only option being **Y** for annual.
+
+## `YEAR`
+
+The four digit year of the expansion.
+
+## `QUARTER`
+
+The quarter of the expansion, with the only option being **1** for an annual expansion.
+ 
+## `TYPE_OF_DAY`
+
+The type of day of the expansion, either **WD** for weekday or **WE** for weekend/holiday.
+
+## `PROCESS_TYPE`
+
+The source of interview data for the expansion, either **G** for actual interviews or `R` for reference values.
+
+## `FISHERY_TYPE`
+
+The charter status of the expansion, either **C** for charter or **N** for non-charter.
+
+## `PORT_FK`
+
+The database key corresponding to the port of the expansion, with likely values of:
+
+*	1 = Agana Boat Basin
+*	2 = Agat Marina
+*	3 = Merizo Pier
+ 
+## `SURVEY_ZONE_FK`
+
+The database key corresponding to the survey zone of the expansion, with likely values of:
+
+*	21 = Merizo Pier
+*	22 = Agana Boat Basin
+*	23 = Agat Marina
+*	24 = Other Ports (activity outside of the three main ports, as detected by trailer counts during participation runs); note that before 1989 Agana Boat Basin was the only sampled port and from 1989 to 1994 Agana Boat Basin and Merizo Pier were the only sampled ports
+
+## `METHOD_FK`:
+
+The database key corresponding to the method key of the expansion, with likely values of:
+ 
+*	1 = Trolling
+*	2 = Bottom
+*	3 = Atulai Night Light
+*	4 = Mix Spearfishing
+*	5 = Spear/Snorkel
+*	6 = Spear/SCUBA
+*	7 = Longline
+*	8 = Ika Shibi
+* 99 = UNKNOWN
+* 0 = NULL
+
+## `SYS_CREATE_TIME` 
+
+
+## `SYS_MODIFY_TIME` 
+
+
+## `HASH` 
+
+
+## `NUM_CALENDAR_DAYS`
+
+The total number of days within the expansion period. Computed using data from `G_DAYS` based on the domain determined by [YEAR](#year). Based on the value of [TYPE_OF_DAY](#type_of_day), either the field **`NUM_WD`** (for `TYPE_OF_DAY = WD`) or **`NUM_WE`** (for `TYPE_OF_DAY = WE`) will be summed across the appropriate entries. 
+
+## `NUM_SAMPLE_DAYS`
+
+The number of boat log sampling days within the expansion period. Computed using data from _G_BBS_SMPDY_ based on the domain determined by [YEAR](#year), [TYPE_OF_DAY](#type_of_day), and [PORT_FK](#port_fk). The number of remaining entries is then used. For non-sampled ports (`SURVEY_ZONE_FK = 24`), this is the maximum of **NUM_SAMPLE_DAYS** for the strata of the same type of day and with Agat Marina or Merizo Pier, or the appropriate representative port(s) for years prior to 1995.
+
+## `NUM_KN_METHOD_TRIP`
+
+The number of boat log entries (excluding [METHOD_FK](#method_fk)) where the fishing method was known. This is zero for non-sampled ports (`SURVEY_ZONE_FK = 24`), but for other ports is computed as:
+
+$$
+\begin{aligned}
+& NUM\_KN\_METHOD\_TRIP\\
+&= \sum_{b=1}^BI[FISHED_b=\ "Y"\ and\ METHOD\_FK_b \neq 0\ and\ METHOD\_FK_b \neq 99] \\
+\end{aligned}
+$$
+
+where $I[\ldots]$ is an indicator function that returns 1 if $\ldots$  is true and 0 otherwise.
+
+## `NUM_UNKN_METHOD_TRIP`
+
+The number of boat log entries (excluding [`METHOD_FK`](#method_fk)) where the fishing method was unknown. This is zero for non-sampled ports (`SURVEY_ZONE_FK = 24`), but for other ports is computed as:
+
+$$
+\begin{aligned}
+&NUM\_UNKN\_METHOD\_TRIP = \\
+& \sum_{b=1}^BI[FISHED_b=\ "Y"\ and\ (METHOD\_FK_b=0\ or\ METHOD\_FK_b=99)] \\
+\end{aligned}
+$$
+
+where $I[\ldots]$ is an indicator function that returns 1 if $\ldots$  is true and 0 otherwise.
+
+## `NUM_KN_FISHED_TRIP`
+
+The number of boat log entries (excluding [`METHOD_FK`](#method_fk)) where it was known whether the trip was for fishing or not. This is zero for non-sampled ports (`SURVEY_ZONE_FK = 24`), but for other ports is computed as:
+
+$$NUM\_KN\_FISHED\_TRIP = \sum_{b=1}^B I\ [FISHED_b= "Y"\ or\ FISHED_b="N"]$$
+
+where $I[\ldots]$ is an indicator function that returns 1 if $\ldots$  is true and 0 otherwise.
+
+## `NUM_UNKN_FISHED_TRIP`
+
+The number of boat log entries (excluding [`METHOD_FK`](#method_fk)) where it was unknown whether the trip was for fishing or not. This is zero for non-sampled ports (`SURVEY_ZONE_FK = 24`), but for other ports is computed as:
+
+$$
+\begin{aligned} 
+NUM\_UNKN\_FISHED\_TRIP &= \\
+&\sum_{b=1}^B I[FISHED_b\neq\ "Y"\ and\ FISHED_b\neq\ "N"] \\
+\end{aligned}
+$$
+
+where $I[\ldots]$ is an indicator function that returns 1 if $\ldots$  is true and 0 otherwise.
+
+## `NUM_TRIP`
+
+The number of boat log entries of a specfic fishing method for the current domain. This is zero for non-sampled ports (SURVEY_ZONE_FK = 24), but for other ports is computed as:
+
+$$NUM\_TRIP=\sum_{b=1}^B 1$$
+
+## `NUM_INTERVIEW`
+
+The number of interviews collected for the current domain, excluding pooled interviews. For non-sampled ports (`SURVEY_ZONE_FK = 24`), this includes interviews from both Agat Marina and Merizo Pier, or the appropriate representative port(s) for years prior to 1995.
+
+## `NUM_INTERVIEW_POOLED`
+
+The number of interviews available for the current domain, computed as:
+
+$$NUM\_INTERVIEW = \sum_{i=1}^I 1 $$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `NUM_DAYS_FISHED`
+
+The total number of fishing days represented by interviews collected for the current domain. Computed as:
+
+$$NUM\_DAYS\_FISHED=\sum_{i=1}^I NUM\_DAYS\_FISHED_i$$ 
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `SUM_FISHER`
+
+The total number of fishers represented on interviews for the current domain. Computed as:
+
+$$SUM\_FISHER=\sum_{i=1}^I NUM\_FISHER_i$$ 
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+
+## `SUM_FISHER2`
+
+The sum of squares of the number of fishers represented on interviews for the current domain. Computed as:
+
+$$SUM\_FISHER2=\sum_{i=1}^I NUM\_FISHER_i^{\ 2} $$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `AVG_FISHER`
+
+The average number of fishers represented on interviews for the current domain. Computed as:
+
+$$AVG\_FISHER=\frac{SUM\_FISHER}{NUM\_INTERVIEW}$$
+
+## `VAR_AVG_FISHER`
+
+The variance of the number of fishers represented on interviews for the current domain. Computed as:
+
+$$VAR\_AVG\_FISHER =  \frac{SUM\_FISHER2\ - \frac{SUM\_FISHER^2}{NUM\_INTERVIEW}}
+{NUM\_INTERVIEW*(NUM\_INTERVIEW-1)}$$
+
+## `SUM_HOUR`
+
+The total number of fishing hours represented on interviews for the current domain. Computed as:
+
+$$SUM\_HOUR=\sum_{i=1}^I HOURS\_FISHED_i $$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `SUM_HOUR2`
+
+The sum of squares of the number of fishing hours represented on interviews for the current domain. Computed as:
+
+$$ SUM\_HOUR2 = \sum_{i=1}^I HOURS\_FISHED_i^{\ 2}$$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `AVG_HOUR` 
+
+The average number of fishing hours represented on interviews for the current domain. Computed as:
+
+$$AVG\_HOUR = \frac{SUM\_HOUR}{NUM\_INTERVIEW}$$
+
+## `VAR_AVG_HOUR`
+
+The variance of the number of fishing hours represented on interviews for the current domain. Computed as:
+
+$$ VAR\_AVG\_HOUR = 
+\frac{SUM\_HOUR2\ -\ \frac{SUM\_HOUR^2}{NUM\_INTERVIEW}} 
+{NUM\_INTERVIEW*(NUM\_INTERVIEW-1)} $$
+
+## `SUM_FISHER_HOUR`
+
+The total number of fisher hours represented on interviews for the current domain. Computed as:
+
+$$SUM\_FISHER\_HOUR=\sum_{i=1}^I NUM\_FISHER_i*HOURS\_FISHED_i $$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `SUM_FISHER_HOUR2`
+
+The sum of squares of the number of fisher hours represented on interviews for the current domain. Computed as:
+
+$$SUM\_FISHER\_HOUR2=\sum_{i=1}^I (NUM\_FISHER_i*HOURS\_FISHED_i )^2$$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `AVG_FISHER_HOUR`
+
+The average number of fisher hours represented on interviews for the current domain. Computed as:
+
+$$ AVG\_FISHER\_HOUR=\frac{SUM\_FISHER\_HOUR}{NUM\_INTERVIEW}$$
+
+## `VAR_AVG_FISHER_HOUR`
+
+The variance of the number of fisher hours represented on interviews for the current domain. Computed as:
+
+$$ VAR\_AVG\_FISHER\_HOUR= \frac
+{SUM\_FISHER\_HOUR2 - \frac{SUM\_FISHER\_HOUR^2}{NUM\_INTERVIEW}} 
+{NUM\_INTERVIEW*(NUM\_INTERVIEW-1)} $$
+
+## `SUM_GEAR`
+
+The total number of fishing gears represented on interviews for the current domain. Computed as:
+
+$$ SUM\_GEAR=\sum_{i=1}^I\ SUM\_GEAR_i $$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+
+## `SUM_GEAR2`
+
+The sum of squares of the number of fishing gears represented on interviews for the current domain. Computed as:
+
+$$ SUM\_GEAR2=\sum_{i=1}^I NUM\_GEAR_i^{\ 2}$$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `AVG_GEAR`
+
+The average number of fishing gears represented on interviews for the current domain. Computed as:
+
+$$AVG\_GEAR=\frac{SUM\_GEAR}{NUM\_INTERVIEW}$$
+
+## `VAR_AVG_GEAR`
+
+The variance of the number of fishing gears represented on interviews for the current domain. Computed as:
+
+$$ \text{VAR\_AVG\_GEAR}= \frac{SUM\_GEAR2 - \frac{SUM\_GEAR^2}{NUM\_INTERVIEW} } {NUM\_INTERVIEW*(NUM\_INTERVIEW-1)}$$
+
+## `SUM_EST_TRIP`
+
+The estimated total number of trips on sampling days for the current domain. For non-sampled ports (`SURVEY_ZONE_FK = 24`), this is computed as:
+
+$$SUM\_EST\_TRIP=\sum_{b=1}^B\ 1*A1*A2*\frac{1}{P1}*P2$$
+
+Where $b$ includes fishing trips in the boat log data from **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995. For other ports this is computed as:
+
+$$SUM\_EST\_TRIP=\sum_{b=1}^{B}1*A1*A2*\frac{1}{P1}$$
+
+Where $A1$ is the adjustment factor to account for trips where it was unknown whether the trip was for fishing, computed as:
+
+$$A1=\frac{NUM\_KN\_FISHED\_TRIP+NUM\_UNKN\_FISHED\_TRIP}{NUM\_KN\_FISHED\_TRIP}$$
+
+$A2$ is the adjustment factor to account for fishing trips with unknown fishing methods, computed as:
+
+$$A2=\frac{NUM\_KN\_METHOD\_TRIP+NUM\_UNKN\_METHOD\_TRIP}{NUM\_KN\_METHOD\_TRIP}$$
+
+$P1$ is the estimated proportion of all daily fishing activity that is detected during sampling shifts on a given sampling day. The reciprocal of $P1$ is used to adjust for this undetected fishing activity. $P1$ is retrieved from _G_BBS_P1_ based on the domain determined by [YEAR](#year), [PORT_FK](#port_fk), and [METHOD_FK](#method_fk). Based on the value of [FISHERY_TYPE](#fishery_type), either the field **CHARTER_P1** (for `FISHERY_TYPE = “C”`) or **NON_CHARTER_P1** (for `FISHERY_TYPE = “N”`) will be used. If a value is not available in _G_BBS_P1_, default values for non-charter fishing are given as 0.98 for **Agana Boat Basin**, 0.95 for **Agat Marina**, and 0.8 for **Merizo Pier**. Any other default values are assumed to be 1. For non-sampled ports (`SURVEY_ZONE_FK = 24`), this is the average of $P1$ for the strata of the same method and charter status and with **Agat Marina** or **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+And $P2$ is the adjustment factor to account for trips outside of the three sampled ports, computed as:
+
+$$P2=\frac{\sum_{t=1}^{T} NUM\_VESSEL_t\  \text{if t is at an unsampled port}}{\sum_{t=1}^{T} NUM\_VESSEL_t\  \text{if t is at Agat Marina or Merizo Pier}}$$
+
+Or the appropriate representative port(s) for years prior to 1995.
+
+## `SUM_EST_TRIP2`
+
+The sum of the estimated square number of trips, aggregated by sample date. For non-sampled ports (`SURVEY_ZONE_FK = 24`), this is computed as:
+
+$$SUM\_EST\_TRIP2=\left(A1*A2*\frac{1}{P1}*P2\right)^2*\sum_{d=1}^{D}\left(\sum_{b=1}^{B}1\right)^2 $$
+
+Where $b$ includes fishing trips in the boat-log data from **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995. For other ports this is computed as:
+
+$$SUM\_EST\_TRIP2=\left(A1*A2*\frac{1}{P1}\right)^2*\sum_{d=1}^{D}\left(\sum_{b=1}^{B}1\right)^2$$
+
+
+
+## `AVG_EST_TRIP`
+
+The average estimated number of trips on sampling days for the current domain. Computed as:
+
+$$AVG\_EST\_TRIP=\frac{SUM\_EST\_TRIP}{NUM\_SAMPLE\_DAYS}$$
+
+## `VAR_EST_TRIP`
+
+The variance of the estimated number of trips per sampling day for the current domain. Computed as:
+
+$$ VAR\_EST\_TRIP=
+\frac{SUM\_EST\_TRIP2\ - \frac{SUM\_EST\_TRIP^2}{NUM\_SAMPLE\_DAYS} }
+{NUM\_SAMPLE\_DAYS * (NUM\_SAMPLE\_DAYS-1)} $$
+
+## `STD_EST_TRIP`
+
+The coefficient of variation of the average number of trips per sampling days for the current domain. Computed as:
+
+$$STD\_EST\_TRIP=100*\frac{\sqrt{VAR\_EST\_TRIP}}{AVG\_EST\_TRIP}$$
+
+## `CPUE_TRIP`
+
+The average catch-per-trip from interviews for the current domain. Measured in kg/trip and computed as:
+
+$$CPUE\_TRIP=\frac{SUM\_TOT\_KGS}{NUM\_INTERVIEW}$$
+
+## `VAR_CPUE_TRIP`
+
+The variance of the catch-per-trip from interviews for the current domain. Measured in (kg/trip)$^2$ and computed as:
+
+$$VAR\_CPUE\_TRIP=\frac{ SUM\_TOT\_KGS2 - \frac{SUM\_TOT\_KGS^2} {NUM\_INTERVIEW}}{NUM\_INTERVIEW * (NUM\_INTERVIEW-1)}$$
+
+## `STD_CPUE_TRIP` 
+
+The coefficient of variation of the catch-per-trip from interviews for the current domain. Measured in kg/trip and computed as:
+
+$$STD\_CPUE\_TRIP= 100*\frac{\sqrt{VAR\_CPUE\_TRIP}} {CPUE\_TRIP}$$
+
+## `CPUE_HOUR`
+
+The average catch-per-hour from interviews for the current domain. Measured in kg/hr and computed as:
+
+$$CPUE\_HOUR=\frac{SUM\_TOT\_KGS}{SUM\_HOUR}$$
+
+## `VAR_CPUE_HOUR`
+
+The variance of the catch-per-hour from interviews for the current domain. Measured in (kg/hr)$^2$ and computed as:
+
+$$
+\begin{aligned}
+& VAR\_CPUE\_HOUR\ = \\ 
+& \frac{CPUE\_TRIP^2}{AVG\_HOUR^2}\ *\\
+& \left( \frac{VAR\_CPUE\_TRIP}{CPUE\_TRIP^2} - 2*\frac{COV\_TO\_KGS\_HOUR}{CPUE\_TRIP*AVG\_HOUR} +  \frac{VAR\_AVG\_HOUR}{AVG\_HOUR^2} \right) \\
+\end{aligned}
+$$
+
+where:
+
+$$
+\begin{aligned}
+& COV\_TOT\_KGS\_HOUR= \\
+& \frac{1}{(NUM\_INTERVIEW-1)} \\
+& *\sum_{i=1}^I(HOURS\_FISHED_i-AVG\_HOUR)*(TOT\_EST\_KGS_i-AVG\_TOT\_KGS)\\
+\end{aligned}
+$$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `STD_CPUE_HOUR`
+
+The coefficient of variation of the catch-per-hour from interviews for the current domain. Measured in kg/hr and computed as:
+
+$$STD\_CPUE\_HOUR=100*\frac{\sqrt{VAR\_CPUE\_HOUR}}{CPUE\_HOUR}$$
+
+## `CPUE_GEAR` 
+
+The average catch-per-gear from interviews for the current domain. Measured in kg/gear and computed as:
+
+$$CPUE\_GEAR = \frac{SUM\_TOT\_KGS}{SUM\_GEAR}$$
+
+## `VAR_CPUE_GEAR`
+
+The variance of the catch-per-gear from interviews for the current domain. Measured in (kg/gear)$^2$ and computed as:
+
+$$
+\begin{aligned}
+& VAR\_CPUE\_GEAR \\
+&= \ \frac{CPUE\_TRIP^2}{AVG\_GEAR^2}\ *\\
+&\ \left(\frac{VAR\_CPUE\_TRIP}{CPUE\_TRIP^2}-2*\frac{COV\_TOT\_KGS\_GEAR}{CPUE\_TRIP*AVG\_GEAR}+\frac{VAR\_AVG\_GEAR}{AVG\_GEAR^2} \right)\\
+\end{aligned}
+$$
+
+where:
+
+$$
+\begin{aligned}
+& COV\_TOT\_KGS\_GEAR \\ 
+&= \frac{1}{NUM\_INTERVIEW-1}\\ 
+& * \sum_{i=1}^{I} (NUM\_GEAR_i-AVG\_GEAR)*(TOT\_EST\_KGS_i-AVG\_TOT\_KGS)\\
+\end{aligned}
+$$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes interviews from **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995. $TOT\_EST\_KGS$ is the total catch weight from all species in catch interview $i$.
+
+## `STD_CPUE_GEAR`
+
+The coefficient of variation of the catch-per-gear from interviews for the current domain. Measured in kg/gear and computed as:
+
+$$STD\_CPUE\_GEAR=100 * \frac{\sqrt{VAR\_CPUE\_GEAR}}{CPUE\_GEAR}$$
+
+## `CPUE_FISHER_HOUR`
+
+The average catch-per-fisher-hour from interviews for the current domain. Measured in kg/(fisher * hour) and computed as:
+
+$$CPUE\_FISHER\_HOUR=\frac{SUM\_TOT\_KGS}{SUM\_FISHER\_HOUR}$$
+
+## `VAR_CPUE_FISHER_HOUR`
+
+The variance of the catch-per-fisher-hour from interviews for the current domain. Measured in (kg/(fisher * hour))2 and computed as:
+
+$$
+\begin{aligned}
+& VAR\_CPUE\_FISHER\_HOUR  \\
+& = \frac{CPUE\_TRIP^2}{AVG\_FISHER\_HOUR^2} \\
+& * \left( \frac{VAR\_CPUE\_TRIP}{CPUE\_TRIP^2} -2*  \frac{COV\_TOT\_KGS\_FISHER\_HOUR}{(CPUE\_TRIP*AVG\_FISHER\_HOUR)} 
+\right. \nonumber \\
+& \left. +\ \frac{VAR\_AVG\_FISHER\_HOUR}{AVG\_FISHER\_HOUR^2} \right)\\ 
+\end{aligned}
+$$
+
+Where:
+
+$$
+\begin{aligned}
+&COV\_TOT\_KGS\_FISHER\_HOUR  \\ 
+&\ = \frac{1}{NUM\_INTERVIEW-1} &\\ 
+&\ * \sum_{i=1}^I(NUM\_FISHER_i*HOURS\_FISHED_i-AVG\_FISHER\_HOUR) \\
+&\ * (TOT\_EST\_KGS_i-AVG\_TOT\_KGS) 
+\end{aligned}
+$$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+
+## `STD_CPUE_FISHER_HOUR`
+
+The coefficient of variation of the catch-per-fisher-hour from interviews for the current domain. Measured in kg/(fisher * hour) and computed as:
+
+$$STD\_CPUE\_FISHER\_HOUR=100*\frac{\sqrt{VAR\_CPUE\_FISHER\_HOUR}}{CPUE\_FISHER\_HOUR}$$
+
+## `EXP_TRIP`
+
+The expanded number of trips for the current domain. Computed as:
+
+$$ EXP\_TRIP=AVG\_EST\_TRIP*NUM\_CALENDAR\_DAYS $$
+
+## `VAR_EXP_TRIP`
+
+The variance of the expanded number of trips for the current domain. Computed as:
+
+$$ VAR\_EXP\_TRIP=VAR\_EST\_TRIP*NUM\_CALENDAR\_DAYS^2$$
+
+## `STD_EXP_TRIP`
+
+The coefficient of variation of the expanded number of trips for the current domain. Computed as:
+
+$$STD\_EXP\_TRIP=100*\frac{\sqrt{VAR\_EXP\_TRIP}}{EXP\_TRIP}$$
+
+## `EXP_HOUR`
+
+The expanded number of fishing hours for the current domain. Measured in hours and computed as:
+
+$$EXP\_HOUR=AVG\_HOUR*EXP\_TRIP$$
+
+## `VAR_EXP_HOUR`
+
+The variance of the expanded number of fishing hours for the current domain. Measured in hour2 and computed as:
+
+$$
+\begin{aligned}
+& VAR\_EXP\_HOUR \\
+& =VAR\_AVG\_HOUR*EXP\_TRIP^2+VAR\_EXP\_TRIP*AVG\_HOUR^2 \\
+& -VAR\_AVG\_HOUR*VAR\_EXP\_TRIP\\
+\end{aligned}
+$$
+
+## `STD_EXP_HOUR`
+
+The coefficient of variation of the expanded number of fishing hours for the current domain. Measured in hours and computed as:
+
+$$ STD\_EXP\_HOUR=100*\frac{\sqrt{VAR\_EXP\_HOUR}}{EXP\_HOUR}$$
+
+## `EXP_FISHER`
+
+The expanded number of fishers for the current domain. Computed as:
+
+$$EXP\_FISHER=AVG\_FISHER*EXP\_TRIP$$
+
+## `VAR_EXP_FISHER`
+
+The variance of the expanded number of fishers for the current domain. Computed as:
+
+$$
+\begin{aligned}
+&VAR\_EXP\_FISHER \\
+&=VAR\_AVG\_FISHER*EXP\_TRIP^2+VAR\_EXP\_TRIP*AVG\_FISHER^2\\
+&-VAR\_AVG\_FISHER*VAR\_EXP\_TRIP \\
+\end{aligned}
+$$
+
+## `STD_EXP_FISHER`
+
+The coefficient of variation of the expanded number of fishers for the current domain. Computed as:
+
+$$STD\_EXP\_FISHER=100*\frac{\sqrt{VAR\_EXP\_FISHER}}{EXP\_FISHER}$$
+
+## `EXP_FISHER_HOUR`
+
+The expanded number of fisher-hours for the current domain. Measured in fisher * hour and computed as:
+$$EXP\_FISHER\_HOUR=AVG\_FISHER\_HOUR*EXP\_TRIP$$
+
+## `VAR_EXP_FISHER_HOUR`
+
+The variance of the expanded number of fisher-hours for the current domain. Measured in (fisher * hour)^2 and computed as:
+
+$$
+\begin{aligned}
+&VAR\_EXP\_FISHER\_HOUR \\
+&=VAR\_AVG\_FISHER\_HOUR*EXP\_TRIP^2+VAR\_EXP\_TRIP\\
+&\ * AVG\_FISHER\_HOUR^2-VAR\_AVG\_FISHER\_HOUR*VAR\_EXP\_TRIP\\
+\end{aligned}
+$$
+
+## `STD_EXP_FISHER_HOUR`
+
+The coefficient of variation of the expanded number of fisher-hours for the current domain. Measured in fisher * hour and computed as:
+
+$$STD\_EXP\_FISHER\_HOUR=100*\frac{\sqrt{VAR\_EXP\_FISHER\_HOUR}}{EXP\_FISHER\_HOUR}$$
+
+## `EXP_GEAR`
+
+The expanded number of fishing gears for the current domain. Computed as:
+
+$$ EXP\_GEAR=AVG\_GEAR*EXP\_TRIP $$
+
+## `VAR_EXP_GEAR`
+
+The variance of the expanded number of fishing gears for the current domain. Computed as:
+
+$$
+\begin{aligned}
+&VAR\_EXP\_GEAR\\
+&=VAR\_AVG\_GEAR*EXP\_TRIP^2+VAR\_EXP\_TRIP*AVG\_GEAR^2\\
+&-VAR\_AVG\_GEAR*VAR\_EXP\_TRIP\\
+\end{aligned}
+$$
+
+## `STD_EXP_GEAR`
+
+The coefficient of variation of the expanded number of fishing gears for the current domain. Computed as:
+
+$$STD\_EXP\_GEAR=100*\frac{\sqrt{VAR\_EXP\_GEAR}}{EXP\_GEAR}$$
+
+## `EXP_TOT_KGS`
+
+The expanded catch for the current domain. Measured in kg and computed as:
+
+$$EXP\_TOT\_KGS=CPUE\_TRIP*EXP\_TRIP $$
+
+## `SUM_TOT_KGS`
+
+The total catch represented on interviews for the current domain. Measured in kg and computed as:
+
+$$SUM\_TOT\_KGS=\sum_{i=1}^{I}TOT\_EST\_KGS_i$$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `SUM_TOT_KGS2`
+
+The sum of squares of the catch represented on interviews for the current domain. Measured in $kg^2$ and computed as:
+
+$$SUM\_TOT\_KGS2=\sum_{i=1}^{I} TOT\_EST\_KGS_i^{\ 2}$$
+
+For non-sampled ports (`SURVEY_ZONE_FK = 24`), $i$ includes **Agat Marina** and **Merizo Pier**, or the appropriate representative port(s) for years prior to 1995.
+
+## `VAR_EXP_TOT_KGS`
+
+The variance of the expanded catch for the current domain. Measured in kg^2 and computed as:
+
+$$
+\begin{aligned}
+&VAR\_EXP\_TOT\_KGS\\
+&=VAR\_CPUE\_TRIP*EXP\_TRIP^2+VAR\_EXP\_TRIP*CPUE\_TRIP^2\\
+&-VAR\_CPUE\_TRIP*VAR\_EXP\_TRIP\\
+\end{aligned}
+$$
+
+## `STD_EXP_TOT_KGS`
+
+The coefficient of variation of the expanded catch for the current domain. Measured in kg and computed as:
+
+$$STD\_EXP\_TOT\_KGS=100*\frac{\sqrt{VAR\_EXP\_TOT\_KGS}}{EXP\_TOT\_KGS}$$
+
+---
+
+# Fields in G_BBS_SPC
+
+
+## `SPC_PK`
+
+The private key associated with a particular species catch expansion. Consists of 23 characters of the form `PyyyyqqmmmmsssnnnnnDDCP`, determined as:
+
+*	`P`: A single capital letter for PERIOD_TYPE
+*	`yyyy`: The four digits for YEAR
+*	`qq`: Two digits for QUARTER, with leading zeros if necessary
+*	`mmmm`: Four digits for METHOD_FK, with leading zeros if necessary
+*	`sss`: Three digits for SURVEY_ZONE_FK, with leading zeros if necessary
+* `nnnnn`: Five digits for SPECIES_FK, with leading zeros if necessary
+* `DD`: Two capital letters for TYPE_OF_DAY
+* `C`: A single capital letter for FISHERY_TYPE
+* `P`: A single letter for PROCESS_TYPE
+
+
+## `EXP_FK`
+
+The foreign key associated with a particular domain expansion. Consists of 18 characters of the form `PyyyyqqmmmmsssDDCP`, determined as:
+
+* `P`: A single capital letter for PERIOD_TYPE
+* `yyyy`: The four digits for YEAR
+* `qq`: Two digits for QUARTER, with leading zeros if necessary
+* `mmmm`: Four digits for METHOD_FK, with leading zeros if necessary
+* `sss`: Three digits for SURVEY_ZONE_FK, with leading zeros if necessary
+* `DD`: Two capital letters for TYPE_OF_DAY
+* `C`: A single capital letter for FISHERY_TYPE
+* `P`: A single letter for PROCESS_TYPE
+
+## `SPECIES_FK`
+
+The foreign key associated with a particular species.
+
+
+## `NUM_INTERVIEW`
+
+The number of interviews of the current domain that included catch of the current species. Computed as:
+
+$$NUM\_INTERVIEW=\sum_{c=1}^C\ 1 $$
+
+## `KGS_CAUGHT`
+
+The estimated expanded catch for the current species $(s)$ in the current domain. Measured in kg and computed as:
+
+$$KGS\_CAUGHT=
+\frac{\sum_{c=1}^{C}EST\_KGS_{s,c} }{(\sum_{s=1}^S \sum_{c=1}^{C} EST\_KGS_(s,c)} )
+*EXP\_TOT\_LBS$$
+
+## `LBS_SOLD` 
+
+## `NUM_KEPT`
+
+The number of specimens of the current species $(s)$ that were recorded in interviews of the current domain. Computed as:
+
+$$NUM\_KEPT=\sum_{c=1}^{C}NUM\_KEPT_{s,c} $$
+
+## `SYS_CREATE_TIME` 
+
+## `SYS_MODIFY_TIME` 
+
+## `HASH` 

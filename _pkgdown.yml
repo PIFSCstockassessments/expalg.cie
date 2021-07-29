@@ -1,0 +1,17 @@
+reference: 
+- title: Functions
+  contents:
+    - run_expalg
+    - starts_with("calc_")
+    - starts_with("df_")
+    - starts_with("get_")
+    - pool_interviews
+- title: Datasets
+  desc: >
+    Guam boat-based expansion survey representing total catch and catch by species. 
+    For more information, see the vignette *"Guam Boat Based Expansion Database Fields"*
+    which describes the fields for the total catch and catch by species tables.
+  contents:
+    - has_keyword("datasets")
+
+
