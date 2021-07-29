@@ -127,7 +127,7 @@ df_to_array = function(x, l) {
 #' 
 run_expansion = function(year, pool_f, species) {
   
-  sample_days = read.csv(system.file("extdata","CIE_sample_days_allyears.csv", package= "expalg"), stringsAsFactors = F)
+  sample_days = read.csv(system.file("extdata","CIE_sample_days_allyears.csv", package= "expalg.cie"), stringsAsFactors = F)
   sample_days_current_year = filter(sample_days, sample_days$YEAR == year)
   
  # Ma used MySQL package to read MySQL tables into R and use write.csv to create the csv files for use in this program 
@@ -137,18 +137,18 @@ run_expansion = function(year, pool_f, species) {
  # bl = inner_join(bl_head, bl_detail, by = c("BLHD_PK" = "BLHD_FK"))
   
  # Ma joined the two tables with MySQL in R and output the result as "data/CIE_bl_allyears.csv" 
-  bl = read.csv(system.file("extdata","CIE_bl_allyears.csv", package="expalg"), stringsAsFactors = F)
+  bl = read.csv(system.file("extdata","CIE_bl_allyears.csv", package="expalg.cie"), stringsAsFactors = F)
   bl_current_year = filter(bl, substr(bl$SAMPLE_DATE, 1, 4) == year)
   
-  p1 = read.csv(system.file("extdata","CIE_p1_allyears.csv", package ="expalg"), stringsAsFactors = F)
+  p1 = read.csv(system.file("extdata","CIE_p1_allyears.csv", package ="expalg.cie"), stringsAsFactors = F)
   p1_current_year = filter(p1, p1$YEAR == year)
   
-  days = read.csv(system.file("extdata","CIE_days_allyears.csv", package ="expalg"), stringsAsFactors = F)
+  days = read.csv(system.file("extdata","CIE_days_allyears.csv", package ="expalg.cie"), stringsAsFactors = F)
   days_current_year = filter(days, days$YEAR == year)
   
-  interviews_raw = read.csv(system.file("extdata","CIE_interviews_raw.csv", package ="expalg"), stringsAsFactors = F)
+  interviews_raw = read.csv(system.file("extdata","CIE_interviews_raw.csv", package ="expalg.cie"), stringsAsFactors = F)
   interviews_raw = mutate(interviews_raw, YEAR = strtoi(substr(interviews_raw$SAMPLE_DATE, 1, 4)))
-  catch_raw = read.csv(system.file("extdata","CIE_catch_raw.csv", package ="expalg"), stringsAsFactors = F)
+  catch_raw = read.csv(system.file("extdata","CIE_catch_raw.csv", package ="expalg.cie"), stringsAsFactors = F)
   # 6/23/20 added by TM
   if(!is.na(species)) {
     catch_raw = filter(catch_raw, catch_raw$SPECIES_FK %in% species)
@@ -160,10 +160,10 @@ run_expansion = function(year, pool_f, species) {
   interviews_current_year = filter(interviews_raw, interviews_raw$YEAR == year)
   catch_current_year = filter(catch_raw, substr(catch_raw$INTERVIEW_FK, 1, 4) == year)
   
-  iwc = read.csv(system.file("extdata","CIE_iwc_allyears.csv", package ="expalg"), stringsAsFactors = F)
+  iwc = read.csv(system.file("extdata","CIE_iwc_allyears.csv", package ="expalg.cie"), stringsAsFactors = F)
   iwc_current_year = filter(iwc, substr(iwc$SAMPLE_DATE, 1, 4) == year)
   
-  reference_raw = read.csv(system.file("extdata","CIE_reference_raw.csv", package ="expalg"), stringsAsFactors = F)
+  reference_raw = read.csv(system.file("extdata","CIE_reference_raw.csv", package ="expalg.cie"), stringsAsFactors = F)
 
   # vector whose length is the number of types of day to use when type of day is a dimension of interest
   days_refer <- c(1, 2)
