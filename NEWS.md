@@ -1,3 +1,8 @@
+# expalg.cie 0.9.3
+
+* Renamed to **expalg.cie** (previously known as **expalg**)
+* Documentation updates and fixes
+
 # expalg 0.9.2
 
 * Documentation updates 
