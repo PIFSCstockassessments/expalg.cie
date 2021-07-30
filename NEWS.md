@@ -1,6 +1,7 @@
 # expalg.cie 0.9.3
 
 * Renamed to **expalg.cie** (previously known as **expalg**)
+* Dataset updates
 * Documentation updates and fixes
 
 # expalg 0.9.2
