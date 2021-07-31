@@ -1,6 +1,6 @@
 # expalg.cie
  <!-- badges: start -->
-  [![R-CMD-check](https://github.com/PIFSCstockassessments/expalg.cie/workflows/R-CMD-check/badge.svg)](https://github.com/PIFSCstockassessments/expalg.cie/actions)
+  [![R-CMD-check](https://github.com/PIFSCstockassessments/expalg.cie/actions/workflows/check-release.yaml/badge.svg)](https://github.com/PIFSCstockassessments/expalg.cie/actions/workflows/check-release.yaml)
   <!-- badges: end -->
 
 Small-scale nearshore fisheries in the United States territories of Guam, the Commonwealth of the Northern Mariana Islands (CNMI), and American Samoa target reef, bottom, and nearshore pelagic species. These fisheries are of fundamental importance to subsistence fishers, critical in local cultural traditions, and provide a source of income and recreation to the local population. The R package **expalg.cie** is used to estimate annual catch and effort from boat-based fishing surveys in Guam.
