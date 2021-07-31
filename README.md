@@ -1,4 +1,7 @@
 # expalg.cie
+ <!-- badges: start -->
+  [![R-CMD-check](https://github.com/PIFSCstockassessments/expalg.cie/workflows/R-CMD-check/badge.svg)](https://github.com/PIFSCstockassessments/expalg.cie/actions)
+  <!-- badges: end -->
 
 Small-scale nearshore fisheries in the United States territories of Guam, the Commonwealth of the Northern Mariana Islands (CNMI), and American Samoa target reef, bottom, and nearshore pelagic species. These fisheries are of fundamental importance to subsistence fishers, critical in local cultural traditions, and provide a source of income and recreation to the local population. The R package **expalg.cie** is used to estimate annual catch and effort from boat-based fishing surveys in Guam.
 
@@ -25,7 +28,7 @@ Run `run_expalg()` with the following parameters to execute the expansion algori
 
 ### Data Tables
 
-`run_expalg()` contains all the methods necessary to run the Guam boat-based expansion algorithm. `run_expalg()` imports reads in eight CSV data files embedded in the installed package `extdata` subdirectory:
+`run_expalg()` contains all the methods necessary to run the Guam boat-based expansion algorithm. `run_expalg()` reads in eight CSV data files embedded in the installed package `extdata` subdirectory:
 
 - CIE_sample_days_all_years.csv
 - CIE_reference_raw.csv
