@@ -5,7 +5,7 @@
 
 Small-scale nearshore fisheries in the United States territories of Guam, the Commonwealth of the Northern Mariana Islands (CNMI), and American Samoa target reef, bottom, and nearshore pelagic species. These fisheries are of fundamental importance to subsistence fishers, critical in local cultural traditions, and provide a source of income and recreation to the local population. The R package **expalg.cie** is used to estimate annual catch and effort from boat-based fishing surveys in Guam.
 
-**expalg.cie** also reproduces the case study presented in the NOAA Tech Memo _"Shore-based and boat-based fishing surveys in Guam, the CNMI, and American Samoa: Survey design, expansion algorithm, and a case study"_.
+**expalg.cie** was developed to assist the Center of Independent Experts (CIE) review of the expansion algorithm and reproduces the case study presented in the NOAA Tech Memo _"Shore-based and boat-based fishing surveys in Guam, the CNMI, and American Samoa: Survey design, expansion algorithm, and a case study"_.
 
 # Package Installation
 ```r
