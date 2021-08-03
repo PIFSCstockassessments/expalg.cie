@@ -10,7 +10,6 @@ Description: Small-scale nearshore fisheries in the United States territories of
 Depends: R (>= 4.0.0)
 Imports:
   dplyr,
-  magrittr,
   rlang
 License: file LICENSE
 VignetteBuilder: 
