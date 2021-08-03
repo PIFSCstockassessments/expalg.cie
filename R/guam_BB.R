@@ -1,22 +1,3 @@
-# Note: This file contains the two user inputs (year and pool_f) and the main executable function (run_expansion).
-#       All reading of input data from the MySQL database is performed in this code, and passed on to code in the
-#       file "guam BB expansion.R" to perform the expansion calculations.
-
-#library(RMySQL)  *** Use csv files for input rather than MySQL tables**** Use modified interview pooling program!!!
-#library(dplyr)
-
-## Note: Non-portable calls 
-# R Studio RProj sets Working Directory
-# setwd("/Users/Toby/Documents/Work/20200415 CIE Expansion Review/Sensitivity Section/Guam BBS/")
-
-  
-#source("C:/Users/Hongguang.Ma/Documents/TeleWork/CIE_Territory Surveys/Demo_withCSVinput/Guam BBS/guam BB expansion_FY20csv.R")
-#source("C:/Users/Hongguang.Ma/Documents/TeleWork/CIE_Territory Surveys/Demo_withCSVinput/Guam BBS/guam BB interview pooling FY20csv.R")
-# vectors to define the indices for levels of each survey stratum
-# days_refer = NULL # type of day
-# charters_refer = NULL # charter status
-# ports_refer = NULL # survey port
-# methods_refer = NULL # fishing method
 
 #' Type of day indices corresponding to a vector of database type of day entries
 #' 
@@ -112,6 +93,8 @@ df_to_array = function(x, l) {
 
 #' Run Expansion Algorithm 
 #' 
+#' "CIE_" input data *.csv files are read, and passed to the expansion calculations.
+#' 
 #' @param year year of the expansion
 #' @param pool_f = whether to pool interviews when fewer than 3 are available for a stratum
 #' @param species species ...
@@ -131,10 +114,6 @@ run_expansion = function(year, pool_f, species) {
   sample_days_current_year = filter(sample_days, sample_days$YEAR == year)
   
  # Ma used MySQL package to read MySQL tables into R and use write.csv to create the csv files for use in this program 
-  
- # bl_head = read.csv("G_BBS_BLHD.csv", stringsAsFactors = F)
- # bl_detail = read.csv("G_BBS_BLDT.csv", stringsAsFactors = F)
- # bl = inner_join(bl_head, bl_detail, by = c("BLHD_PK" = "BLHD_FK"))
   
  # Ma joined the two tables with MySQL in R and output the result as "data/CIE_bl_allyears.csv" 
   bl = read.csv(system.file("extdata","CIE_bl_allyears_pub.csv", package="expalg.cie"), stringsAsFactors = F)
@@ -165,18 +144,26 @@ run_expansion = function(year, pool_f, species) {
   
   reference_raw = read.csv(system.file("extdata","CIE_reference_raw.csv", package ="expalg.cie"), stringsAsFactors = F)
 
+  
+  ## ***vectors to define the indices for levels of each survey stratum***
+  # days_refer:
   # vector whose length is the number of types of day to use when type of day is a dimension of interest
   days_refer <- c(1, 2)
+
+  # charters_refer:
   # vector whose length is the number of charter statuses to use when charter status is a dimension of interest
   charters_refer <- c(1, 2)
+  
+  # ports_refer:
   # vector whose length is the number of ports to use when port is a dimension of interest
   # the length is obtained by finding all of the different port keys referenced in data
-  #ports_refer <- sort(unique(c(sample_days_current_year$PORT_FK, interviews_current_year$PORT_FK, bl_current_year$PORT_FK, p1_current_year$PORT_FK)), decreasing = FALSE)
   ports_refer <- sort(unique(c(sample_days_current_year$PORT_FK, interviews_current_year$PORT_FK, bl_current_year$PORT_FK, p1_current_year$PORT_FK)), decreasing = FALSE)
   
+  # methods_refer:
   # vector whose length is the number of methods to use when method is a dimension of interest
   # the length is obtained by finding all of the different method keys referenced in data
   methods_refer <- sort(unique(c(interviews_current_year$METHOD_FK, bl_current_year$METHOD_FK, p1_current_year$METHOD_FK)), decreasing = FALSE)
+  
   
   # remove duplicate columns
   bl_current_year = bl_current_year[!duplicated(names(bl_current_year))]
@@ -287,6 +274,12 @@ run_expansion = function(year, pool_f, species) {
 #' @param species NA to expand for all species, or a vector of SPECIES_PK to only include specific species
 #' @param start_year the first year of the expansion to run (earliest available year is 1982)
 #' @param end_year the last year of the expansion to run (most recent available year is 2019)
+#'
+#' @return List containing 2 data frames:
+#' \describe{
+#' \item{bb_exp}{Total catch for each estimation domain}
+#' \item{bb_spc}{Total catch by species for each estimation domain}
+#' } 
 #'
 #' @export
 #' 

@@ -15,6 +15,13 @@ run_expalg(pool_f = TRUE, species = NA, start_year = 1982, end_year = 2019)
 
 \item{end_year}{the last year of the expansion to run (most recent available year is 2019)}
 }
+\value{
+List containing 2 data frames:
+\describe{
+\item{bb_exp}{Total catch for each estimation domain}
+\item{bb_spc}{Total catch by species for each estimation domain}
+}
+}
 \description{
 Run Expansion Algorithm
 }
