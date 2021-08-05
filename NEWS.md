@@ -2,7 +2,7 @@
 
 * Production ready version for Center of Independent Experts (CIE) review.
 * Documention updates and cleanup code.
-* Removed `magittr` import, added `markdown` to suggest
+* Removed unused `magrittr` import, added `markdown` to suggests
 
 # expalg.cie 0.9.3
 
