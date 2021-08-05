@@ -6,8 +6,16 @@ Authors@R: c(
   person("Hongguang","Ma", email="hongguang.ma@noaa.gov", role="aut"),
   person("Felipe", "Carvalho", email = "felipe.carvalho@noaa.gov", role = c("aut")),
   person("Eric", "Fletcher", email = "Eric.Fletcher@noaa.gov", role = c("aut","cre")))
-Description: Small-scale nearshore fisheries in the United States territories of Guam, the Commonwealth of the Northern Mariana Islands (CNMI), and American Samoa target reef, bottom, and nearshore pelagic species. These fisheries are of fundamental importance to subsistence fishers, critical in local cultural traditions, and provide a source of income and recreation to the local population. The R package “expalg” is used to estimate annual catch and effort from boat-based fishing surveys in Guam. 
-Depends: R (>= 4.0.0)
+Description: Small-scale nearshore fisheries in the United States territories 
+  of Guam, the Commonwealth of the Northern Mariana Islands (CNMI), and American 
+  Samoa target reef, bottom, and nearshore pelagic species. These fisheries are 
+  of fundamental importance to subsistence fishers, critical in local cultural 
+  traditions, and provide a source of income and recreation to the local 
+  population. "expalg.cie" was developed to assist the Center of Independent 
+  Experts (CIE) review of the expansion algorithm and reproduces the case study 
+  presented in the NOAA Tech Memo “Shore-based and boat-based fishing surveys in 
+  Guam, the CNMI, and American Samoa: Survey design, expansion algorithm, and a 
+  case study”.
 Imports:
   dplyr,
   rlang
