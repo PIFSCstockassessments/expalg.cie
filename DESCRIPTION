@@ -16,6 +16,7 @@ Description: Small-scale nearshore fisheries in the United States territories
   presented in the NOAA Tech Memo “Shore-based and boat-based fishing surveys in 
   Guam, the CNMI, and American Samoa: Survey design, expansion algorithm, and a 
   case study”.
+Depends: R (>= 3.5.0)
 Imports:
   dplyr,
   rlang
