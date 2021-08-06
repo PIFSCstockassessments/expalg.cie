@@ -3,6 +3,7 @@
 * Production ready version for Center of Independent Experts (CIE) review.
 * Documention updates and cleanup code.
 * Removed unused `magrittr` import, added `markdown` to suggests
+* Set R dependency to R verson 3.5.0 and up.
 
 # expalg.cie 0.9.3
 
