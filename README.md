@@ -36,8 +36,8 @@ Run `run_expalg()` with the following parameters to execute the expansion algori
 - CIE_catch_raw.csv
 - CIE_interviews_raw_pub.csv
 - CIE_days_allyears.csv
-- CIE_p1_allyears_pub.csv
-- CIE_bl_allyears.csv
+- CIE_p1_allyears.csv
+- CIE_bl_allyears_pub.csv
 
 
 ## Example 
