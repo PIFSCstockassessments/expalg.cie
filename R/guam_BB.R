@@ -96,8 +96,8 @@ df_to_array = function(x, l) {
 #' "CIE_" input data *.csv files are read, and passed to the expansion calculations.
 #' 
 #' @param year year of the expansion
-#' @param pool_f = whether to pool interviews when fewer than 3 are available for a stratum
-#' @param species species ...
+#' @param pool_f Pool interviews when fewer than 3 are available for a stratum
+#' @param species NA to expand for all species, or a vector of SPECIES_PK to only include specific species
 #' 
 #' @return two data frames containing all expansion and species composition fields for each expansion stratum
 #' 
@@ -109,6 +109,11 @@ df_to_array = function(x, l) {
 #' @noRd
 #' 
 run_expansion = function(year, pool_f, species) {
+
+  # Throw error message if 'pool_f' was not a logical string  
+  if(is.na(pool_f)){
+    stop("pool_f is not a logical type")
+  }
   
   sample_days = read.csv(system.file("extdata","CIE_sample_days_allyears.csv", package= "expalg.cie"), stringsAsFactors = F)
   sample_days_current_year = filter(sample_days, sample_days$YEAR == year)
@@ -290,10 +295,10 @@ run_expalg <- function(pool_f=TRUE,
   expansion = data.frame()
   species_composition = data.frame()
   for(year in start_year:end_year) {
-    res = run_expansion(year, pool_f, species)
+    res = run_expansion(year, as.logical(pool_f), species)
     expansion = rbind(expansion, res[[1]])
     species_composition = rbind(species_composition, res[[2]])
   }
-  #TODO: Write expanstion and species_compostion to file
+  
   return(list(bb_exp=expansion,bb_spc=species_composition))
 }

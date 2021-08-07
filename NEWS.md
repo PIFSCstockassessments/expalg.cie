@@ -1,9 +1,15 @@
-# expalg.cle 1.0.0
+# expalg.cie 1.0.1
+
+* Fixed `pool_f` parameter from `run_expalg()` to handle R logical vector strings.
+  * Added check for non-logical `pool_f` strings. 
+* Documentation Updates and Fixes
+  
+# expalg.cie 1.0.0
 
 * Production ready version for Center of Independent Experts (CIE) review.
-* Documention updates and cleanup code.
+* Documentation updates and cleanup code.
 * Removed unused `magrittr` import, added `markdown` to suggests
-* Set R dependency to R verson 3.5.0 and up.
+* Set R dependency to R version 3.5.0 and up.
 
 # expalg.cie 0.9.3
 

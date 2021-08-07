@@ -2,7 +2,7 @@
 % Please edit documentation in R/guam_BB_expansion.R
 \name{calc_var_average}
 \alias{calc_var_average}
-\title{Variance of the mean of a Average}
+\title{Variance of the mean of a variable}
 \usage{
 calc_var_average(x)
 }
@@ -13,5 +13,5 @@ calc_var_average(x)
 Variance of the average of those values
 }
 \description{
-Variance of the mean of a Average
+Variance of the mean of a variable
 }

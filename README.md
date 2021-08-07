@@ -21,7 +21,7 @@ Run `run_expalg()` with the following parameters to execute the expansion algori
 
 |Parameter    | Description                      |
 |:----- | :--------------------------------|
-|`pool_f`     | defaults to `TRUE`, which indicates that interview pooling is used; change to `False` if pooling should not be used |
+|`pool_f`     | defaults to `TRUE`, which indicates that interview pooling is used; change to `FALSE` if pooling should not be used |
 |`species`    | defaults to `NA`, which indicates that the expansion is performed for all species; change to a vector of species keys if only specific species should be included   |
 |`start_year` | The first year of the expansion to run (earliest available year is 1982)  |
 |`end_year`   | The last year of the expansion to run (most recent available year is 2019)|
