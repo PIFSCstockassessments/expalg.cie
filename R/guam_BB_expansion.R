@@ -64,7 +64,7 @@ get_survey_zone = function(port_fk) {
   }
 }
 
-#' Variance of the mean of a Average
+#' Variance of the mean of a variable
 #' 
 #' @param x A vector of values
 #' 
