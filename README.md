@@ -51,7 +51,7 @@ write.csv(expalg.cie::g_bb_exp, file="G_BB_EXP.csv")
 write.csv(expalg.cie::g_bb_spc, file="G_BB_SPC.csv")
 ```
 
-The main function wrapper `run_expalg()` will return a list of two data frames, `bb_exp` (representing "expansion": the total catch for each estimation domain) and `bb_spc` (representing "species_composition": the total catch by species for each estimation domain). The data frames can be manipulated and output as desired. 
+The main function wrapper `run_expalg()` returns a list of two data frames, `bb_exp` (representing "expansion": the total catch for each estimation domain) and `bb_spc` (representing "species_composition": the total catch by species for each estimation domain). The data frames can be manipulated and output as desired. 
 
 ```r
 library(expalg.cie)
