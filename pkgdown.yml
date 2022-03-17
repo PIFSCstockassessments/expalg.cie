@@ -3,7 +3,7 @@ pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   GuamBB_DBFields_Formulas: GuamBB_DBFields_Formulas.html
-last_built: 2022-03-17T00:17Z
+last_built: 2022-03-17T01:25Z
 urls:
   reference: https://pifscstockassessments.github.io/expalg.cie/reference
   article: https://pifscstockassessments.github.io/expalg.cie/articles
