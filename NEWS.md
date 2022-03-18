@@ -1,3 +1,5 @@
+# expalg.cie (development version)
+
 # expalg.cie 1.0.1
 
 * Fixed `pool_f` parameter from `run_expalg()` to handle R logical vector strings.
