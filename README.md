@@ -15,7 +15,7 @@ install_github("PIFSCstockassessments/expalg.cie@*release") #Latest Release
 
 # Total catch & catch by species data with input data tables
 
-The following instructions describe the steps to produce Guam boat-based expansion algoriithm output data based on the eight input CSV data files embeded in the `extdata` subdirectory:
+The following instructions describe the steps to produce Guam boat-based expansion algorithm output data based on the eight input CSV data files embedded in the `extdata` subdirectory:
 
 - CIE_sample_days_all_years.csv
 - CIE_reference_raw.csv
