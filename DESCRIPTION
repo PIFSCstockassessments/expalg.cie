@@ -1,11 +1,11 @@
 Package: expalg.cie
 Title: Expansion Algorithm
-Version: 1.0.1
+Version: 1.0.1.9000
 Authors@R: c(
-  person("Toby","Mathews", email="toby.e.matthews@noaa.gov", role="aut"),
+  person("Toby","Mathews", email="toby.e.matthews@noaa.gov", role=c("aut","cre")),
   person("Hongguang","Ma", email="hongguang.ma@noaa.gov", role="aut"),
   person("Felipe", "Carvalho", email = "felipe.carvalho@noaa.gov", role = c("aut")),
-  person("Eric", "Fletcher", email = "Eric.Fletcher@noaa.gov", role = c("aut","cre")))
+  person("Eric", "Fletcher", email = "Eric.Fletcher@noaa.gov", role = c("aut")))
 Description: Small-scale nearshore fisheries in the United States territories 
   of Guam, the Commonwealth of the Northern Mariana Islands (CNMI), and American 
   Samoa target reef, bottom, and nearshore pelagic species. These fisheries are 

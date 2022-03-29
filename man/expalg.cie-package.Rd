@@ -18,13 +18,13 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Eric Fletcher \email{Eric.Fletcher@noaa.gov}
+\strong{Maintainer}: Toby Mathews \email{toby.e.matthews@noaa.gov}
 
 Authors:
 \itemize{
-  \item Toby Mathews \email{toby.e.matthews@noaa.gov}
   \item Hongguang Ma \email{hongguang.ma@noaa.gov}
   \item Felipe Carvalho \email{felipe.carvalho@noaa.gov}
+  \item Eric Fletcher \email{Eric.Fletcher@noaa.gov}
 }
 
 }
