@@ -1,4 +1,10 @@
-# expalg.cie (development version)
+# expalg.cie 1.1.0 (development version)
+
+* Updated 2019 data for `CIE_days_allyears`. 
+  * R example package data files `g_bb_exp` and `g_bb_spc` were updated with the `CIE_days_allyears` datatable revision.
+* Revised README to distinguish output methods between input datafiles (`extdata`) and its own package data file.
+* 
+* Minor Documentation Updates and Fixes.
 
 # expalg.cie 1.0.1
 
