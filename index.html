@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">expalg.cie</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1.9000</span>
       </span>
     </div>
 
@@ -102,10 +102,36 @@
 <span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"PIFSCstockassessments/expalg.cie@*release"</span><span class="op">)</span> <span class="co">#Latest Release </span></code></pre></div>
 </div>
 <div class="section level1">
-<h1 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<h1 id="total-catch--catch-by-species-data-with-input-data-tables">Total catch &amp; catch by species data with input data tables<a class="anchor" aria-label="anchor" href="#total-catch--catch-by-species-data-with-input-data-tables"></a>
 </h1>
-<p>The following instructions describe the steps to produce expansion outputs.</p>
-<p>Run <code><a href="reference/run_expalg.html">run_expalg()</a></code> with the following parameters to execute the expansion algorithm:</p>
+<p>The following instructions describe the steps to produce Guam boat-based expansion algorithm output data based on the eight input CSV data files embedded in the <code>extdata</code> subdirectory:</p>
+<ul>
+<li>CIE_sample_days_all_years.csv</li>
+<li>CIE_reference_raw.csv</li>
+<li>CIE_iwc_allyears.csv</li>
+<li>CIE_catch_raw.csv</li>
+<li>CIE_interviews_raw_pub.csv</li>
+<li>CIE_days_allyears.csv</li>
+<li>CIE_p1_allyears.csv</li>
+<li>CIE_bl_allyears_pub.csv</li>
+</ul>
+<p><code><a href="reference/run_expalg.html">run_expalg()</a></code> contains all the methods necessary to run the Guam boat-based expansion algorithm.</p>
+<p>Run <code><a href="reference/run_expalg.html">run_expalg()</a></code> with the default parameters to execute the expansion algorithm:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PIFSCstockassessments/expalg.cie" class="external-link">expalg.cie</a></span><span class="op">)</span>
+<span class="va">guam</span> <span class="op">&lt;-</span><span class="fu"><a href="reference/run_expalg.html">run_expalg</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># load w/ defaults</span>
+
+<span class="co"># Set "Exapansion" or "Species Composition" data frames as indvidual R data.tables</span>
+<span class="va">guam_expansion</span> <span class="op">&lt;-</span> <span class="va">guam</span><span class="op">$</span><span class="va">bb_exp</span>
+<span class="va">guam_species</span> <span class="op">&lt;-</span> <span class="va">guam</span><span class="op">$</span><span class="va">bb_spc</span>
+
+<span class="co"># Write data.frames to file</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">guam_expansion</span>, file<span class="op">=</span><span class="st">"out_guam_exp.csv"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">guam_species</span>, file<span class="op">=</span><span class="st">"out_guam_spc.csv"</span><span class="op">)</span></code></pre></div>
+<p>The main function wrapper <code><a href="reference/run_expalg.html">run_expalg()</a></code> returns a list of two data frames, <code>bb_exp</code> (representing “expansion”: the total catch for each estimation domain) and <code>bb_spc</code> (representing “species_composition”: the total catch by species for each estimation domain). The data frames can be manipulated and output as desired.</p>
+<div class="section level2">
+<h2 id="run_expalg-parameters">run_expalg parameters<a class="anchor" aria-label="anchor" href="#run_expalg-parameters"></a>
+</h2>
 <table class="table">
 <colgroup>
 <col width="15%">
@@ -126,53 +152,27 @@
 </tr>
 <tr class="odd">
 <td align="left"><code>start_year</code></td>
-<td align="left">The first year of the expansion to run (earliest available year is 1982)</td>
+<td align="left">The first year of the expansion to run. Earliest available year is 1982, and also default value.</td>
 </tr>
 <tr class="even">
 <td align="left"><code>end_year</code></td>
-<td align="left">The last year of the expansion to run (most recent available year is 2019)</td>
+<td align="left">The last year of the expansion to run. Most recent available year is 2019, and also default value.</td>
 </tr>
 </tbody>
 </table>
-<div class="section level3">
-<h3 id="data-tables">Data Tables<a class="anchor" aria-label="anchor" href="#data-tables"></a>
-</h3>
-<p><code><a href="reference/run_expalg.html">run_expalg()</a></code> contains all the methods necessary to run the Guam boat-based expansion algorithm. <code><a href="reference/run_expalg.html">run_expalg()</a></code> reads in eight CSV data files embedded in the installed package <code>extdata</code> subdirectory:</p>
-<ul>
-<li>CIE_sample_days_all_years.csv</li>
-<li>CIE_reference_raw.csv</li>
-<li>CIE_iwc_allyears.csv</li>
-<li>CIE_catch_raw.csv</li>
-<li>CIE_interviews_raw_pub.csv</li>
-<li>CIE_days_allyears.csv</li>
-<li>CIE_p1_allyears.csv</li>
-<li>CIE_bl_allyears_pub.csv</li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
-</h2>
-<p>The package includes results from the Guam boat-based expansion representing total catch (<code><a href="reference/g_bb_exp.html">expalg.cie::g_bb_exp</a></code>) and catch by species (<code><a href="reference/g_bb_spc.html">expalg.cie::g_bb_spc</a></code>). The vignette <em>“Guam Boat Based Expansion Database Fields”</em> describes the fields for the total catch and catch by species tables.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Write R data object to csv</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="fu">expalg.cie</span><span class="fu">::</span><span class="va"><a href="reference/g_bb_exp.html">g_bb_exp</a></span>, file<span class="op">=</span><span class="st">"G_BB_EXP.csv"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="fu">expalg.cie</span><span class="fu">::</span><span class="va"><a href="reference/g_bb_spc.html">g_bb_spc</a></span>, file<span class="op">=</span><span class="st">"G_BB_SPC.csv"</span><span class="op">)</span></code></pre></div>
-<p>The main function wrapper <code><a href="reference/run_expalg.html">run_expalg()</a></code> returns a list of two data frames, <code>bb_exp</code> (representing “expansion”: the total catch for each estimation domain) and <code>bb_spc</code> (representing “species_composition”: the total catch by species for each estimation domain). The data frames can be manipulated and output as desired.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/PIFSCstockassessments/expalg.cie" class="external-link">expalg.cie</a></span><span class="op">)</span>
-<span class="va">guam</span> <span class="op">&lt;-</span><span class="fu"><a href="reference/run_expalg.html">run_expalg</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># load w/ defaults</span>
-
-<span class="co"># Set "Exapansion" or "Species Composition" data frames as indvidual R data.tables</span>
-<span class="va">guam_expansion</span> <span class="op">&lt;-</span> <span class="va">guam</span><span class="op">$</span><span class="va">bb_exp</span>
-<span class="va">guam_species</span> <span class="op">&lt;-</span> <span class="va">guam</span><span class="op">$</span><span class="va">bb_spc</span>
-
-<span class="co"># Write data.frames to file</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">guam_expansion</span>, file<span class="op">=</span><span class="st">"out_guam_exp.csv"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">guam_species</span>, file<span class="op">=</span><span class="st">"out_guam_spc.csv"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div class="section level1">
-<h1 id="github-disclaimer">GitHub Disclaimer<a class="anchor" aria-label="anchor" href="#github-disclaimer"></a>
+<h1 id="total-catch--catch-by-species-data-with-expalgcie-r-package-datafiles">Total catch &amp; catch by species data with expalg.cie R package datafiles<a class="anchor" aria-label="anchor" href="#total-catch--catch-by-species-data-with-expalgcie-r-package-datafiles"></a>
+</h1>
+<p>The package includes results from the Guam boat-based expansion representing total catch (<code><a href="reference/g_bb_exp.html">expalg.cie::g_bb_exp</a></code>) and catch by species (<code><a href="reference/g_bb_spc.html">expalg.cie::g_bb_spc</a></code>). The vignette <em>“Guam Boat Based Expansion Database Fields”</em> describes the fields for the total catch and catch by species tables.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#Write R data object to csv</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="fu">expalg.cie</span><span class="fu">::</span><span class="va"><a href="reference/g_bb_exp.html">g_bb_exp</a></span>, file<span class="op">=</span><span class="st">"G_BB_EXP.csv"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="fu">expalg.cie</span><span class="fu">::</span><span class="va"><a href="reference/g_bb_spc.html">g_bb_spc</a></span>, file<span class="op">=</span><span class="st">"G_BB_SPC.csv"</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level1">
+<h1 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a>
 </h1>
 <p>This repository is a scientific product and is not official communication of the National Oceanic and Atmospheric Administration, or the United States Department of Commerce. All NOAA GitHub project code is provided on an ‘as is’ basis and the user assumes responsibility for its use. Any claims against the Department of Commerce or Department of Commerce bureaus stemming from the use of this GitHub project will be governed by all applicable Federal law. Any reference to specific commercial products, processes, or services by servicemark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by the Department of Commerce. The Department of Commerce seal and logo, or the seal and logo of a DOC bureau, shall not be used in any manner to imply endorsement of any commercial product or activity by DOC or the United States Government.</p>
 </div>
@@ -207,10 +207,10 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Toby Mathews <br><small class="roles"> Author </small>  </li>
+<li>Toby Mathews <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Hongguang Ma <br><small class="roles"> Author </small>  </li>
 <li>Felipe Carvalho <br><small class="roles"> Author </small>  </li>
-<li>Eric Fletcher <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Eric Fletcher <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
