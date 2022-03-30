@@ -1,6 +1,6 @@
 Package: expalg.cie
 Title: Expansion Algorithm
-Version: 1.0.1.9000
+Version: 1.1.0
 Authors@R: c(
   person("Toby","Mathews", email="toby.e.matthews@noaa.gov", role=c("aut","cre")),
   person("Hongguang","Ma", email="hongguang.ma@noaa.gov", role="aut"),
