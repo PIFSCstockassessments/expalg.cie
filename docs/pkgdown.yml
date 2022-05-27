@@ -1,10 +1,10 @@
-pandoc: '2.13'
-pkgdown: 1.6.1
+pandoc: 2.17.1.1
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   GuamBB_DBFields_Formulas: GuamBB_DBFields_Formulas.html
-last_built: 2021-08-07T00:08Z
+last_built: 2022-05-26T23:56Z
 urls:
-  reference: https://pifscstockassessments.github.io/expalg.cie//reference
-  article: https://pifscstockassessments.github.io/expalg.cie//articles
+  reference: https://pifscstockassessments.github.io/expalg.cie/reference
+  article: https://pifscstockassessments.github.io/expalg.cie/articles
 
