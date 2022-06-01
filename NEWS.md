@@ -1,3 +1,7 @@
+# expalg.cie 1.1.1
+
+* Minor fix with expalg.cie site. Updated pkgdown depenency.
+
 # expalg.cie 1.1.0
 
 * Updated 2019 data for `CIE_days_allyears`. 
