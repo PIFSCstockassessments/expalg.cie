@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">expalg.cie</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -64,7 +60,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/PIFSCstockassessments/expalg.cie/">
+  <a href="https://github.com/PIFSCstockassessments/expalg.cie/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -79,25 +75,35 @@
 
       
 
-      </header><script src="GuamBB_DBFields_Formulas_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Guam Boat Based Expansion Database Fields</h1>
-                        <h4 class="author">Author</h4>
+                        <h4 data-toc-skip class="author">Author</h4>
             
-            <h4 class="date">2021-08-06</h4>
+            <h4 data-toc-skip class="date">2022-05-31</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/PIFSCstockassessments/expalg.cie/blob/master/vignettes/GuamBB_DBFields_Formulas.Rmd"><code>vignettes/GuamBB_DBFields_Formulas.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/PIFSCstockassessments/expalg.cie/blob/HEAD/vignettes/GuamBB_DBFields_Formulas.Rmd" class="external-link"><code>vignettes/GuamBB_DBFields_Formulas.Rmd</code></a></small>
       <div class="hidden name"><code>GuamBB_DBFields_Formulas.Rmd</code></div>
 
     </div>
 
     
     
-<div id="intro" class="section level1">
-<h1 class="hasAnchor">
-<a href="#intro" class="anchor"></a>Intro</h1>
-<p>Expansion results are stored in the MySQL database tables <code>G_BBS_EXP</code> and <code>G_BBS_SPC</code>. <code>G_BBS_EXP</code> has fields describing the expansion domain, available data, and expanded values. <code>G_BBS_SPC</code> has fields describing the catch and market activity for individual species. Following are short descriptions of each field, along with the formulas used to compute the fields when applicable. Expansion strata are specified by <code>YEAR</code>, <code>TYPE_OF_DAY</code>, <code>FISHERY_TYPE</code>, <code>PORT_FK</code> or <code>SURVEY_ZONE_FK</code>, and <code>METHOD_FK</code>. In the formulas, the following variables are used:</p>
+<div class="section level2">
+<h2 id="intro">Intro<a class="anchor" aria-label="anchor" href="#intro"></a>
+</h2>
+<p>Expansion results are stored in the MySQL database tables
+<code>G_BBS_EXP</code> and <code>G_BBS_SPC</code>.
+<code>G_BBS_EXP</code> has fields describing the expansion domain,
+available data, and expanded values. <code>G_BBS_SPC</code> has fields
+describing the catch and market activity for individual species.
+Following are short descriptions of each field, along with the formulas
+used to compute the fields when applicable. Expansion strata are
+specified by <code>YEAR</code>, <code>TYPE_OF_DAY</code>,
+<code>FISHERY_TYPE</code>, <code>PORT_FK</code> or
+<code>SURVEY_ZONE_FK</code>, and <code>METHOD_FK</code>. In the
+formulas, the following variables are used:</p>
 <table class="table">
 <colgroup>
 <col width="82%">
@@ -122,18 +128,21 @@
 <td>[1,B]</td>
 </tr>
 <tr class="odd">
-<td>Trailer count entry for current domain from <code>G_BBS_IWC</code>
+<td>Trailer count entry for current domain from
+<code>G_BBS_IWC</code>
 </td>
 <td>t</td>
 <td>[1,T]</td>
 </tr>
 <tr class="even">
-<td>Interview for current domain from <code>G_BBS_INT</code>. Any pooled interviews are included</td>
+<td>Interview for current domain from <code>G_BBS_INT</code>. Any pooled
+interviews are included</td>
 <td>i</td>
 <td>[1,I]</td>
 </tr>
 <tr class="odd">
-<td>Species catch entry fo the current species in the current domain from <code>G_BBS_CATCH</code>
+<td>Species catch entry fo the current species in the current domain
+from <code>G_BBS_CATCH</code>
 </td>
 <td>c</td>
 <td>[1,C]</td>
@@ -147,14 +156,16 @@
 </table>
 <hr>
 </div>
-<div id="fields-in-g_bbs_exp" class="section level1">
-<h1 class="hasAnchor">
-<a href="#fields-in-g_bbs_exp" class="anchor"></a>Fields in G_BBS_EXP</h1>
-<div id="exp_pk" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exp_pk" class="anchor"></a><code>EXP_PK</code>
+<div class="section level2">
+<h2 id="fields-in-g_bbs_exp">Fields in G_BBS_EXP<a class="anchor" aria-label="anchor" href="#fields-in-g_bbs_exp"></a>
 </h2>
-<p>The private key associated with a particular domain expansion. Consists of 18 characters of the form <code>PyyyyqqmmmmsssDDCP</code>, determined as:</p>
+<div class="section level3">
+<h3 id="exp_pk">
+<code>EXP_PK</code><a class="anchor" aria-label="anchor" href="#exp_pk"></a>
+</h3>
+<p>The private key associated with a particular domain expansion.
+Consists of 18 characters of the form <code>PyyyyqqmmmmsssDDCP</code>,
+determined as:</p>
 <ul>
 <li>
 <code>P</code>: A single capital letter for <a href="#period_type"><code>PERIOD_TYPE</code></a>
@@ -163,11 +174,14 @@
 <code>yyyy</code>: The four digits for <a href="#year"><code>YEAR</code></a>
 </li>
 <li>
-<code>qq</code>: Two digits for <a href="#quarter"><code>QUARTER</code></a>, with leading zeros if necessary</li>
+<code>qq</code>: Two digits for <a href="#quarter"><code>QUARTER</code></a>, with leading zeros if
+necessary</li>
 <li>
-<code>mmmm</code>: Four digits for <a href="#method_fk"><code>METHOD_FK</code></a>, with leading zeros if necessary</li>
+<code>mmmm</code>: Four digits for <a href="#method_fk"><code>METHOD_FK</code></a>, with leading zeros if
+necessary</li>
 <li>
-<code>sss</code>: Three digits for <a href="#survey_zone_fk"><code>SURVEY_ZONE_FK</code></a>, with leading zeros if necessary</li>
+<code>sss</code>: Three digits for <a href="#survey_zone_fk"><code>SURVEY_ZONE_FK</code></a>, with leading
+zeros if necessary</li>
 <li>
 <code>DD</code>: Two capital letters for <a href="#type_of_day"><code>TYPE_OF_DAY</code></a>
 </li>
@@ -179,69 +193,82 @@
 </li>
 </ul>
 </div>
-<div id="period_type" class="section level2">
-<h2 class="hasAnchor">
-<a href="#period_type" class="anchor"></a><code>PERIOD_TYPE</code>
-</h2>
-<p>The time span of the expansion, with the only option being <strong>Y</strong> for annual.</p>
+<div class="section level3">
+<h3 id="period_type">
+<code>PERIOD_TYPE</code><a class="anchor" aria-label="anchor" href="#period_type"></a>
+</h3>
+<p>The time span of the expansion, with the only option being
+<strong>Y</strong> for annual.</p>
 </div>
-<div id="year" class="section level2">
-<h2 class="hasAnchor">
-<a href="#year" class="anchor"></a><code>YEAR</code>
-</h2>
+<div class="section level3">
+<h3 id="year">
+<code>YEAR</code><a class="anchor" aria-label="anchor" href="#year"></a>
+</h3>
 <p>The four digit year of the expansion.</p>
 </div>
-<div id="quarter" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quarter" class="anchor"></a><code>QUARTER</code>
-</h2>
-<p>The quarter of the expansion, with the only option being <strong>1</strong> for an annual expansion.</p>
+<div class="section level3">
+<h3 id="quarter">
+<code>QUARTER</code><a class="anchor" aria-label="anchor" href="#quarter"></a>
+</h3>
+<p>The quarter of the expansion, with the only option being
+<strong>1</strong> for an annual expansion.</p>
 </div>
-<div id="type_of_day" class="section level2">
-<h2 class="hasAnchor">
-<a href="#type_of_day" class="anchor"></a><code>TYPE_OF_DAY</code>
-</h2>
-<p>The type of day of the expansion, either <strong>WD</strong> for weekday or <strong>WE</strong> for weekend/holiday.</p>
+<div class="section level3">
+<h3 id="type_of_day">
+<code>TYPE_OF_DAY</code><a class="anchor" aria-label="anchor" href="#type_of_day"></a>
+</h3>
+<p>The type of day of the expansion, either <strong>WD</strong> for
+weekday or <strong>WE</strong> for weekend/holiday.</p>
 </div>
-<div id="process_type" class="section level2">
-<h2 class="hasAnchor">
-<a href="#process_type" class="anchor"></a><code>PROCESS_TYPE</code>
-</h2>
-<p>The source of interview data for the expansion, either <strong>G</strong> for actual interviews or <code>R</code> for reference values.</p>
+<div class="section level3">
+<h3 id="process_type">
+<code>PROCESS_TYPE</code><a class="anchor" aria-label="anchor" href="#process_type"></a>
+</h3>
+<p>The source of interview data for the expansion, either
+<strong>G</strong> for actual interviews or <code>R</code> for reference
+values.</p>
 </div>
-<div id="fishery_type" class="section level2">
-<h2 class="hasAnchor">
-<a href="#fishery_type" class="anchor"></a><code>FISHERY_TYPE</code>
-</h2>
-<p>The charter status of the expansion, either <strong>C</strong> for charter or <strong>N</strong> for non-charter.</p>
+<div class="section level3">
+<h3 id="fishery_type">
+<code>FISHERY_TYPE</code><a class="anchor" aria-label="anchor" href="#fishery_type"></a>
+</h3>
+<p>The charter status of the expansion, either <strong>C</strong> for
+charter or <strong>N</strong> for non-charter.</p>
 </div>
-<div id="port_fk" class="section level2">
-<h2 class="hasAnchor">
-<a href="#port_fk" class="anchor"></a><code>PORT_FK</code>
-</h2>
-<p>The database key corresponding to the port of the expansion, with likely values of:</p>
+<div class="section level3">
+<h3 id="port_fk">
+<code>PORT_FK</code><a class="anchor" aria-label="anchor" href="#port_fk"></a>
+</h3>
+<p>The database key corresponding to the port of the expansion, with
+likely values of:</p>
 <ul>
 <li>1 = Agana Boat Basin</li>
 <li>2 = Agat Marina</li>
 <li>3 = Merizo Pier</li>
 </ul>
 </div>
-<div id="survey_zone_fk" class="section level2">
-<h2 class="hasAnchor">
-<a href="#survey_zone_fk" class="anchor"></a><code>SURVEY_ZONE_FK</code>
-</h2>
-<p>The database key corresponding to the survey zone of the expansion, with likely values of:</p>
+<div class="section level3">
+<h3 id="survey_zone_fk">
+<code>SURVEY_ZONE_FK</code><a class="anchor" aria-label="anchor" href="#survey_zone_fk"></a>
+</h3>
+<p>The database key corresponding to the survey zone of the expansion,
+with likely values of:</p>
 <ul>
 <li>21 = Merizo Pier</li>
 <li>22 = Agana Boat Basin</li>
 <li>23 = Agat Marina</li>
-<li>24 = Other Ports (activity outside of the three main ports, as detected by trailer counts during participation runs); note that before 1989 Agana Boat Basin was the only sampled port and from 1989 to 1994 Agana Boat Basin and Merizo Pier were the only sampled ports</li>
+<li>24 = Other Ports (activity outside of the three main ports, as
+detected by trailer counts during participation runs); note that before
+1989 Agana Boat Basin was the only sampled port and from 1989 to 1994
+Agana Boat Basin and Merizo Pier were the only sampled ports</li>
 </ul>
 </div>
-<div id="method_fk" class="section level2">
-<h2 class="hasAnchor">
-<a href="#method_fk" class="anchor"></a><code>METHOD_FK</code>:</h2>
-<p>The database key corresponding to the method key of the expansion, with likely values of:</p>
+<div class="section level3">
+<h3 id="method_fk">
+<code>METHOD_FK</code>:<a class="anchor" aria-label="anchor" href="#method_fk"></a>
+</h3>
+<p>The database key corresponding to the method key of the expansion,
+with likely values of:</p>
 <ul>
 <li>1 = Trolling</li>
 <li>2 = Bottom</li>
@@ -255,321 +282,466 @@
 <li>0 = NULL</li>
 </ul>
 </div>
-<div id="sys_create_time" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sys_create_time" class="anchor"></a><code>SYS_CREATE_TIME</code>
-</h2>
+<div class="section level3">
+<h3 id="sys_create_time">
+<code>SYS_CREATE_TIME</code><a class="anchor" aria-label="anchor" href="#sys_create_time"></a>
+</h3>
 </div>
-<div id="sys_modify_time" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sys_modify_time" class="anchor"></a><code>SYS_MODIFY_TIME</code>
-</h2>
+<div class="section level3">
+<h3 id="sys_modify_time">
+<code>SYS_MODIFY_TIME</code><a class="anchor" aria-label="anchor" href="#sys_modify_time"></a>
+</h3>
 </div>
-<div id="hash" class="section level2">
-<h2 class="hasAnchor">
-<a href="#hash" class="anchor"></a><code>HASH</code>
-</h2>
+<div class="section level3">
+<h3 id="hash">
+<code>HASH</code><a class="anchor" aria-label="anchor" href="#hash"></a>
+</h3>
 </div>
-<div id="num_calendar_days" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_calendar_days" class="anchor"></a><code>NUM_CALENDAR_DAYS</code>
-</h2>
-<p>The total number of days within the expansion period. Computed using data from <code>G_DAYS</code> based on the domain determined by <a href="#year">YEAR</a>. Based on the value of <a href="#type_of_day">TYPE_OF_DAY</a>, either the field <strong><code>NUM_WD</code></strong> (for <code>TYPE_OF_DAY = WD</code>) or <strong><code>NUM_WE</code></strong> (for <code>TYPE_OF_DAY = WE</code>) will be summed across the appropriate entries.</p>
+<div class="section level3">
+<h3 id="num_calendar_days">
+<code>NUM_CALENDAR_DAYS</code><a class="anchor" aria-label="anchor" href="#num_calendar_days"></a>
+</h3>
+<p>The total number of days within the expansion period. Computed using
+data from <code>G_DAYS</code> based on the domain determined by <a href="#year">YEAR</a>. Based on the value of <a href="#type_of_day">TYPE_OF_DAY</a>, either the field
+<strong><code>NUM_WD</code></strong> (for <code>TYPE_OF_DAY = WD</code>)
+or <strong><code>NUM_WE</code></strong> (for
+<code>TYPE_OF_DAY = WE</code>) will be summed across the appropriate
+entries.</p>
 </div>
-<div id="num_sample_days" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_sample_days" class="anchor"></a><code>NUM_SAMPLE_DAYS</code>
-</h2>
-<p>The number of boat log sampling days within the expansion period. Computed using data from <em>G_BBS_SMPDY</em> based on the domain determined by <a href="#year">YEAR</a>, <a href="#type_of_day">TYPE_OF_DAY</a>, and <a href="#port_fk">PORT_FK</a>. The number of remaining entries is then used. For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), this is the maximum of <strong>NUM_SAMPLE_DAYS</strong> for the strata of the same type of day and with Agat Marina or Merizo Pier, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="num_sample_days">
+<code>NUM_SAMPLE_DAYS</code><a class="anchor" aria-label="anchor" href="#num_sample_days"></a>
+</h3>
+<p>The number of boat log sampling days within the expansion period.
+Computed using data from <em>G_BBS_SMPDY</em> based on the domain
+determined by <a href="#year">YEAR</a>, <a href="#type_of_day">TYPE_OF_DAY</a>, and <a href="#port_fk">PORT_FK</a>.
+The number of remaining entries is then used. For non-sampled ports
+(<code>SURVEY_ZONE_FK = 24</code>), this is the maximum of
+<strong>NUM_SAMPLE_DAYS</strong> for the strata of the same type of day
+and with Agat Marina or Merizo Pier, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="num_kn_method_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_kn_method_trip" class="anchor"></a><code>NUM_KN_METHOD_TRIP</code>
-</h2>
-<p>The number of boat log entries (excluding <a href="#method_fk">METHOD_FK</a>) where the fishing method was known. This is zero for non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), but for other ports is computed as:</p>
+<div class="section level3">
+<h3 id="num_kn_method_trip">
+<code>NUM_KN_METHOD_TRIP</code><a class="anchor" aria-label="anchor" href="#num_kn_method_trip"></a>
+</h3>
+<p>The number of boat log entries (excluding <a href="#method_fk">METHOD_FK</a>) where the fishing method was known.
+This is zero for non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>),
+but for other ports is computed as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp; NUM\_KN\_METHOD\_TRIP\\
-&amp;= \sum_{b=1}^BI[FISHED_b=\ "Y"\ and\ METHOD\_FK_b \neq 0\ and\ METHOD\_FK_b \neq 99] \\
+&amp;= \sum_{b=1}^BI[FISHED_b=\ "Y"\ and\ METHOD\_FK_b \neq 0\
+and\ METHOD\_FK_b \neq 99] \\
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(I[\ldots]\)</span> is an indicator function that returns 1 if <span class="math inline">\(\ldots\)</span> is true and 0 otherwise.</p>
+<p>where <span class="math inline">\(I[\ldots]\)</span> is an indicator
+function that returns 1 if <span class="math inline">\(\ldots\)</span>
+is true and 0 otherwise.</p>
 </div>
-<div id="num_unkn_method_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_unkn_method_trip" class="anchor"></a><code>NUM_UNKN_METHOD_TRIP</code>
-</h2>
-<p>The number of boat log entries (excluding <a href="#method_fk"><code>METHOD_FK</code></a>) where the fishing method was unknown. This is zero for non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), but for other ports is computed as:</p>
+<div class="section level3">
+<h3 id="num_unkn_method_trip">
+<code>NUM_UNKN_METHOD_TRIP</code><a class="anchor" aria-label="anchor" href="#num_unkn_method_trip"></a>
+</h3>
+<p>The number of boat log entries (excluding <a href="#method_fk"><code>METHOD_FK</code></a>) where the fishing method
+was unknown. This is zero for non-sampled ports
+(<code>SURVEY_ZONE_FK = 24</code>), but for other ports is computed
+as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;NUM\_UNKN\_METHOD\_TRIP = \\
-&amp; \sum_{b=1}^BI[FISHED_b=\ "Y"\ and\ (METHOD\_FK_b=0\ or\ METHOD\_FK_b=99)] \\
+&amp; \sum_{b=1}^BI[FISHED_b=\ "Y"\ and\ (METHOD\_FK_b=0\ or\
+METHOD\_FK_b=99)] \\
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(I[\ldots]\)</span> is an indicator function that returns 1 if <span class="math inline">\(\ldots\)</span> is true and 0 otherwise.</p>
+<p>where <span class="math inline">\(I[\ldots]\)</span> is an indicator
+function that returns 1 if <span class="math inline">\(\ldots\)</span>
+is true and 0 otherwise.</p>
 </div>
-<div id="num_kn_fished_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_kn_fished_trip" class="anchor"></a><code>NUM_KN_FISHED_TRIP</code>
-</h2>
-<p>The number of boat log entries (excluding <a href="#method_fk"><code>METHOD_FK</code></a>) where it was known whether the trip was for fishing or not. This is zero for non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), but for other ports is computed as:</p>
-<p><span class="math display">\[NUM\_KN\_FISHED\_TRIP = \sum_{b=1}^B I\ [FISHED_b= "Y"\ or\ FISHED_b="N"]\]</span></p>
-<p>where <span class="math inline">\(I[\ldots]\)</span> is an indicator function that returns 1 if <span class="math inline">\(\ldots\)</span> is true and 0 otherwise.</p>
+<div class="section level3">
+<h3 id="num_kn_fished_trip">
+<code>NUM_KN_FISHED_TRIP</code><a class="anchor" aria-label="anchor" href="#num_kn_fished_trip"></a>
+</h3>
+<p>The number of boat log entries (excluding <a href="#method_fk"><code>METHOD_FK</code></a>) where it was known whether
+the trip was for fishing or not. This is zero for non-sampled ports
+(<code>SURVEY_ZONE_FK = 24</code>), but for other ports is computed
+as:</p>
+<p><span class="math display">\[NUM\_KN\_FISHED\_TRIP = \sum_{b=1}^B I\
+[FISHED_b= "Y"\ or\ FISHED_b="N"]\]</span></p>
+<p>where <span class="math inline">\(I[\ldots]\)</span> is an indicator
+function that returns 1 if <span class="math inline">\(\ldots\)</span>
+is true and 0 otherwise.</p>
 </div>
-<div id="num_unkn_fished_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_unkn_fished_trip" class="anchor"></a><code>NUM_UNKN_FISHED_TRIP</code>
-</h2>
-<p>The number of boat log entries (excluding <a href="#method_fk"><code>METHOD_FK</code></a>) where it was unknown whether the trip was for fishing or not. This is zero for non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), but for other ports is computed as:</p>
+<div class="section level3">
+<h3 id="num_unkn_fished_trip">
+<code>NUM_UNKN_FISHED_TRIP</code><a class="anchor" aria-label="anchor" href="#num_unkn_fished_trip"></a>
+</h3>
+<p>The number of boat log entries (excluding <a href="#method_fk"><code>METHOD_FK</code></a>) where it was unknown
+whether the trip was for fishing or not. This is zero for non-sampled
+ports (<code>SURVEY_ZONE_FK = 24</code>), but for other ports is
+computed as:</p>
 <p><span class="math display">\[
-\begin{aligned} 
+\begin{aligned}
 NUM\_UNKN\_FISHED\_TRIP &amp;= \\
-&amp;\sum_{b=1}^B I[FISHED_b\neq\ "Y"\ and\ FISHED_b\neq\ "N"] \\
+&amp;\sum_{b=1}^B I[FISHED_b\neq\ "Y"\ and\ FISHED_b\neq\
+"N"] \\
 \end{aligned}
 \]</span></p>
-<p>where <span class="math inline">\(I[\ldots]\)</span> is an indicator function that returns 1 if <span class="math inline">\(\ldots\)</span> is true and 0 otherwise.</p>
+<p>where <span class="math inline">\(I[\ldots]\)</span> is an indicator
+function that returns 1 if <span class="math inline">\(\ldots\)</span>
+is true and 0 otherwise.</p>
 </div>
-<div id="num_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_trip" class="anchor"></a><code>NUM_TRIP</code>
-</h2>
-<p>The number of boat log entries of a specfic fishing method for the current domain. This is zero for non-sampled ports (SURVEY_ZONE_FK = 24), but for other ports is computed as:</p>
+<div class="section level3">
+<h3 id="num_trip">
+<code>NUM_TRIP</code><a class="anchor" aria-label="anchor" href="#num_trip"></a>
+</h3>
+<p>The number of boat log entries of a specfic fishing method for the
+current domain. This is zero for non-sampled ports (SURVEY_ZONE_FK =
+24), but for other ports is computed as:</p>
 <p><span class="math display">\[NUM\_TRIP=\sum_{b=1}^B 1\]</span></p>
 </div>
-<div id="num_interview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_interview" class="anchor"></a><code>NUM_INTERVIEW</code>
-</h2>
-<p>The number of interviews collected for the current domain, excluding pooled interviews. For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), this includes interviews from both Agat Marina and Merizo Pier, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="num_interview">
+<code>NUM_INTERVIEW</code><a class="anchor" aria-label="anchor" href="#num_interview"></a>
+</h3>
+<p>The number of interviews collected for the current domain, excluding
+pooled interviews. For non-sampled ports
+(<code>SURVEY_ZONE_FK = 24</code>), this includes interviews from both
+Agat Marina and Merizo Pier, or the appropriate representative port(s)
+for years prior to 1995.</p>
 </div>
-<div id="num_interview_pooled" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_interview_pooled" class="anchor"></a><code>NUM_INTERVIEW_POOLED</code>
-</h2>
-<p>The number of interviews available for the current domain, computed as:</p>
-<p><span class="math display">\[NUM\_INTERVIEW = \sum_{i=1}^I 1 \]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="num_interview_pooled">
+<code>NUM_INTERVIEW_POOLED</code><a class="anchor" aria-label="anchor" href="#num_interview_pooled"></a>
+</h3>
+<p>The number of interviews available for the current domain, computed
+as:</p>
+<p><span class="math display">\[NUM\_INTERVIEW = \sum_{i=1}^I 1
+\]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="num_days_fished" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_days_fished" class="anchor"></a><code>NUM_DAYS_FISHED</code>
-</h2>
-<p>The total number of fishing days represented by interviews collected for the current domain. Computed as:</p>
-<p><span class="math display">\[NUM\_DAYS\_FISHED=\sum_{i=1}^I NUM\_DAYS\_FISHED_i\]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="num_days_fished">
+<code>NUM_DAYS_FISHED</code><a class="anchor" aria-label="anchor" href="#num_days_fished"></a>
+</h3>
+<p>The total number of fishing days represented by interviews collected
+for the current domain. Computed as:</p>
+<p><span class="math display">\[NUM\_DAYS\_FISHED=\sum_{i=1}^I
+NUM\_DAYS\_FISHED_i\]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="sum_fisher" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_fisher" class="anchor"></a><code>SUM_FISHER</code>
-</h2>
-<p>The total number of fishers represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[SUM\_FISHER=\sum_{i=1}^I NUM\_FISHER_i\]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="sum_fisher">
+<code>SUM_FISHER</code><a class="anchor" aria-label="anchor" href="#sum_fisher"></a>
+</h3>
+<p>The total number of fishers represented on interviews for the current
+domain. Computed as:</p>
+<p><span class="math display">\[SUM\_FISHER=\sum_{i=1}^I
+NUM\_FISHER_i\]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="sum_fisher2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_fisher2" class="anchor"></a><code>SUM_FISHER2</code>
-</h2>
-<p>The sum of squares of the number of fishers represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[SUM\_FISHER2=\sum_{i=1}^I NUM\_FISHER_i^{\ 2} \]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="sum_fisher2">
+<code>SUM_FISHER2</code><a class="anchor" aria-label="anchor" href="#sum_fisher2"></a>
+</h3>
+<p>The sum of squares of the number of fishers represented on interviews
+for the current domain. Computed as:</p>
+<p><span class="math display">\[SUM\_FISHER2=\sum_{i=1}^I
+NUM\_FISHER_i^{\ 2} \]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="avg_fisher" class="section level2">
-<h2 class="hasAnchor">
-<a href="#avg_fisher" class="anchor"></a><code>AVG_FISHER</code>
-</h2>
-<p>The average number of fishers represented on interviews for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="avg_fisher">
+<code>AVG_FISHER</code><a class="anchor" aria-label="anchor" href="#avg_fisher"></a>
+</h3>
+<p>The average number of fishers represented on interviews for the
+current domain. Computed as:</p>
 <p><span class="math display">\[AVG\_FISHER=\frac{SUM\_FISHER}{NUM\_INTERVIEW}\]</span></p>
 </div>
-<div id="var_avg_fisher" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_avg_fisher" class="anchor"></a><code>VAR_AVG_FISHER</code>
-</h2>
-<p>The variance of the number of fishers represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[VAR\_AVG\_FISHER =  \frac{SUM\_FISHER2\ - \frac{SUM\_FISHER^2}{NUM\_INTERVIEW}}
+<div class="section level3">
+<h3 id="var_avg_fisher">
+<code>VAR_AVG_FISHER</code><a class="anchor" aria-label="anchor" href="#var_avg_fisher"></a>
+</h3>
+<p>The variance of the number of fishers represented on interviews for
+the current domain. Computed as:</p>
+<p><span class="math display">\[VAR\_AVG\_FISHER =  \frac{SUM\_FISHER2\
+- \frac{SUM\_FISHER^2}{NUM\_INTERVIEW}}
 {NUM\_INTERVIEW*(NUM\_INTERVIEW-1)}\]</span></p>
 </div>
-<div id="sum_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_hour" class="anchor"></a><code>SUM_HOUR</code>
-</h2>
-<p>The total number of fishing hours represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[SUM\_HOUR=\sum_{i=1}^I HOURS\_FISHED_i \]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="sum_hour">
+<code>SUM_HOUR</code><a class="anchor" aria-label="anchor" href="#sum_hour"></a>
+</h3>
+<p>The total number of fishing hours represented on interviews for the
+current domain. Computed as:</p>
+<p><span class="math display">\[SUM\_HOUR=\sum_{i=1}^I HOURS\_FISHED_i
+\]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="sum_hour2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_hour2" class="anchor"></a><code>SUM_HOUR2</code>
-</h2>
-<p>The sum of squares of the number of fishing hours represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[ SUM\_HOUR2 = \sum_{i=1}^I HOURS\_FISHED_i^{\ 2}\]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="sum_hour2">
+<code>SUM_HOUR2</code><a class="anchor" aria-label="anchor" href="#sum_hour2"></a>
+</h3>
+<p>The sum of squares of the number of fishing hours represented on
+interviews for the current domain. Computed as:</p>
+<p><span class="math display">\[ SUM\_HOUR2 = \sum_{i=1}^I
+HOURS\_FISHED_i^{\ 2}\]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="avg_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#avg_hour" class="anchor"></a><code>AVG_HOUR</code>
-</h2>
-<p>The average number of fishing hours represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[AVG\_HOUR = \frac{SUM\_HOUR}{NUM\_INTERVIEW}\]</span></p>
+<div class="section level3">
+<h3 id="avg_hour">
+<code>AVG_HOUR</code><a class="anchor" aria-label="anchor" href="#avg_hour"></a>
+</h3>
+<p>The average number of fishing hours represented on interviews for the
+current domain. Computed as:</p>
+<p><span class="math display">\[AVG\_HOUR =
+\frac{SUM\_HOUR}{NUM\_INTERVIEW}\]</span></p>
 </div>
-<div id="var_avg_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_avg_hour" class="anchor"></a><code>VAR_AVG_HOUR</code>
-</h2>
-<p>The variance of the number of fishing hours represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[ VAR\_AVG\_HOUR = 
-\frac{SUM\_HOUR2\ -\ \frac{SUM\_HOUR^2}{NUM\_INTERVIEW}} 
+<div class="section level3">
+<h3 id="var_avg_hour">
+<code>VAR_AVG_HOUR</code><a class="anchor" aria-label="anchor" href="#var_avg_hour"></a>
+</h3>
+<p>The variance of the number of fishing hours represented on interviews
+for the current domain. Computed as:</p>
+<p><span class="math display">\[ VAR\_AVG\_HOUR =
+\frac{SUM\_HOUR2\ -\ \frac{SUM\_HOUR^2}{NUM\_INTERVIEW}}
 {NUM\_INTERVIEW*(NUM\_INTERVIEW-1)} \]</span></p>
 </div>
-<div id="sum_fisher_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_fisher_hour" class="anchor"></a><code>SUM_FISHER_HOUR</code>
-</h2>
-<p>The total number of fisher hours represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[SUM\_FISHER\_HOUR=\sum_{i=1}^I NUM\_FISHER_i*HOURS\_FISHED_i \]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="sum_fisher_hour">
+<code>SUM_FISHER_HOUR</code><a class="anchor" aria-label="anchor" href="#sum_fisher_hour"></a>
+</h3>
+<p>The total number of fisher hours represented on interviews for the
+current domain. Computed as:</p>
+<p><span class="math display">\[SUM\_FISHER\_HOUR=\sum_{i=1}^I
+NUM\_FISHER_i*HOURS\_FISHED_i \]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="sum_fisher_hour2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_fisher_hour2" class="anchor"></a><code>SUM_FISHER_HOUR2</code>
-</h2>
-<p>The sum of squares of the number of fisher hours represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[SUM\_FISHER\_HOUR2=\sum_{i=1}^I (NUM\_FISHER_i*HOURS\_FISHED_i )^2\]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="sum_fisher_hour2">
+<code>SUM_FISHER_HOUR2</code><a class="anchor" aria-label="anchor" href="#sum_fisher_hour2"></a>
+</h3>
+<p>The sum of squares of the number of fisher hours represented on
+interviews for the current domain. Computed as:</p>
+<p><span class="math display">\[SUM\_FISHER\_HOUR2=\sum_{i=1}^I
+(NUM\_FISHER_i*HOURS\_FISHED_i )^2\]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="avg_fisher_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#avg_fisher_hour" class="anchor"></a><code>AVG_FISHER_HOUR</code>
-</h2>
-<p>The average number of fisher hours represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[ AVG\_FISHER\_HOUR=\frac{SUM\_FISHER\_HOUR}{NUM\_INTERVIEW}\]</span></p>
+<div class="section level3">
+<h3 id="avg_fisher_hour">
+<code>AVG_FISHER_HOUR</code><a class="anchor" aria-label="anchor" href="#avg_fisher_hour"></a>
+</h3>
+<p>The average number of fisher hours represented on interviews for the
+current domain. Computed as:</p>
+<p><span class="math display">\[
+AVG\_FISHER\_HOUR=\frac{SUM\_FISHER\_HOUR}{NUM\_INTERVIEW}\]</span></p>
 </div>
-<div id="var_avg_fisher_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_avg_fisher_hour" class="anchor"></a><code>VAR_AVG_FISHER_HOUR</code>
-</h2>
-<p>The variance of the number of fisher hours represented on interviews for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="var_avg_fisher_hour">
+<code>VAR_AVG_FISHER_HOUR</code><a class="anchor" aria-label="anchor" href="#var_avg_fisher_hour"></a>
+</h3>
+<p>The variance of the number of fisher hours represented on interviews
+for the current domain. Computed as:</p>
 <p><span class="math display">\[ VAR\_AVG\_FISHER\_HOUR= \frac
-{SUM\_FISHER\_HOUR2 - \frac{SUM\_FISHER\_HOUR^2}{NUM\_INTERVIEW}} 
+{SUM\_FISHER\_HOUR2 - \frac{SUM\_FISHER\_HOUR^2}{NUM\_INTERVIEW}}
 {NUM\_INTERVIEW*(NUM\_INTERVIEW-1)} \]</span></p>
 </div>
-<div id="sum_gear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_gear" class="anchor"></a><code>SUM_GEAR</code>
-</h2>
-<p>The total number of fishing gears represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[ SUM\_GEAR=\sum_{i=1}^I\ SUM\_GEAR_i \]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="sum_gear">
+<code>SUM_GEAR</code><a class="anchor" aria-label="anchor" href="#sum_gear"></a>
+</h3>
+<p>The total number of fishing gears represented on interviews for the
+current domain. Computed as:</p>
+<p><span class="math display">\[ SUM\_GEAR=\sum_{i=1}^I\ SUM\_GEAR_i
+\]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="sum_gear2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_gear2" class="anchor"></a><code>SUM_GEAR2</code>
-</h2>
-<p>The sum of squares of the number of fishing gears represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[ SUM\_GEAR2=\sum_{i=1}^I NUM\_GEAR_i^{\ 2}\]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="sum_gear2">
+<code>SUM_GEAR2</code><a class="anchor" aria-label="anchor" href="#sum_gear2"></a>
+</h3>
+<p>The sum of squares of the number of fishing gears represented on
+interviews for the current domain. Computed as:</p>
+<p><span class="math display">\[ SUM\_GEAR2=\sum_{i=1}^I NUM\_GEAR_i^{\
+2}\]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="avg_gear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#avg_gear" class="anchor"></a><code>AVG_GEAR</code>
-</h2>
-<p>The average number of fishing gears represented on interviews for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="avg_gear">
+<code>AVG_GEAR</code><a class="anchor" aria-label="anchor" href="#avg_gear"></a>
+</h3>
+<p>The average number of fishing gears represented on interviews for the
+current domain. Computed as:</p>
 <p><span class="math display">\[AVG\_GEAR=\frac{SUM\_GEAR}{NUM\_INTERVIEW}\]</span></p>
 </div>
-<div id="var_avg_gear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_avg_gear" class="anchor"></a><code>VAR_AVG_GEAR</code>
-</h2>
-<p>The variance of the number of fishing gears represented on interviews for the current domain. Computed as:</p>
-<p><span class="math display">\[ \text{VAR\_AVG\_GEAR}= \frac{SUM\_GEAR2 - \frac{SUM\_GEAR^2}{NUM\_INTERVIEW} } {NUM\_INTERVIEW*(NUM\_INTERVIEW-1)}\]</span></p>
+<div class="section level3">
+<h3 id="var_avg_gear">
+<code>VAR_AVG_GEAR</code><a class="anchor" aria-label="anchor" href="#var_avg_gear"></a>
+</h3>
+<p>The variance of the number of fishing gears represented on interviews
+for the current domain. Computed as:</p>
+<p><span class="math display">\[ \text{VAR\_AVG\_GEAR}= \frac{SUM\_GEAR2
+- \frac{SUM\_GEAR^2}{NUM\_INTERVIEW} }
+{NUM\_INTERVIEW*(NUM\_INTERVIEW-1)}\]</span></p>
 </div>
-<div id="sum_est_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_est_trip" class="anchor"></a><code>SUM_EST_TRIP</code>
-</h2>
-<p>The estimated total number of trips on sampling days for the current domain. For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), this is computed as:</p>
-<p><span class="math display">\[SUM\_EST\_TRIP=\sum_{b=1}^B\ 1*A1*A2*\frac{1}{P1}*P2\]</span></p>
-<p>Where <span class="math inline">\(b\)</span> includes fishing trips in the boat log data from <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995. For other ports this is computed as:</p>
+<div class="section level3">
+<h3 id="sum_est_trip">
+<code>SUM_EST_TRIP</code><a class="anchor" aria-label="anchor" href="#sum_est_trip"></a>
+</h3>
+<p>The estimated total number of trips on sampling days for the current
+domain. For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), this
+is computed as:</p>
+<p><span class="math display">\[SUM\_EST\_TRIP=\sum_{b=1}^B\
+1*A1*A2*\frac{1}{P1}*P2\]</span></p>
+<p>Where <span class="math inline">\(b\)</span> includes fishing trips
+in the boat log data from <strong>Agat Marina</strong> and
+<strong>Merizo Pier</strong>, or the appropriate representative port(s)
+for years prior to 1995. For other ports this is computed as:</p>
 <p><span class="math display">\[SUM\_EST\_TRIP=\sum_{b=1}^{B}1*A1*A2*\frac{1}{P1}\]</span></p>
-<p>Where <span class="math inline">\(A1\)</span> is the adjustment factor to account for trips where it was unknown whether the trip was for fishing, computed as:</p>
+<p>Where <span class="math inline">\(A1\)</span> is the adjustment
+factor to account for trips where it was unknown whether the trip was
+for fishing, computed as:</p>
 <p><span class="math display">\[A1=\frac{NUM\_KN\_FISHED\_TRIP+NUM\_UNKN\_FISHED\_TRIP}{NUM\_KN\_FISHED\_TRIP}\]</span></p>
-<p><span class="math inline">\(A2\)</span> is the adjustment factor to account for fishing trips with unknown fishing methods, computed as:</p>
+<p><span class="math inline">\(A2\)</span> is the adjustment factor to
+account for fishing trips with unknown fishing methods, computed as:</p>
 <p><span class="math display">\[A2=\frac{NUM\_KN\_METHOD\_TRIP+NUM\_UNKN\_METHOD\_TRIP}{NUM\_KN\_METHOD\_TRIP}\]</span></p>
-<p><span class="math inline">\(P1\)</span> is the estimated proportion of all daily fishing activity that is detected during sampling shifts on a given sampling day. The reciprocal of <span class="math inline">\(P1\)</span> is used to adjust for this undetected fishing activity. <span class="math inline">\(P1\)</span> is retrieved from <em>G_BBS_P1</em> based on the domain determined by <a href="#year">YEAR</a>, <a href="#port_fk">PORT_FK</a>, and <a href="#method_fk">METHOD_FK</a>. Based on the value of <a href="#fishery_type">FISHERY_TYPE</a>, either the field <strong>CHARTER_P1</strong> (for <code>FISHERY_TYPE = “C”</code>) or <strong>NON_CHARTER_P1</strong> (for <code>FISHERY_TYPE = “N”</code>) will be used. If a value is not available in <em>G_BBS_P1</em>, default values for non-charter fishing are given as 0.98 for <strong>Agana Boat Basin</strong>, 0.95 for <strong>Agat Marina</strong>, and 0.8 for <strong>Merizo Pier</strong>. Any other default values are assumed to be 1. For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), this is the average of <span class="math inline">\(P1\)</span> for the strata of the same method and charter status and with <strong>Agat Marina</strong> or <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
-<p>And <span class="math inline">\(P2\)</span> is the adjustment factor to account for trips outside of the three sampled ports, computed as:</p>
-<p><span class="math display">\[P2=\frac{\sum_{t=1}^{T} NUM\_VESSEL_t\  \text{if t is at an unsampled port}}{\sum_{t=1}^{T} NUM\_VESSEL_t\  \text{if t is at Agat Marina or Merizo Pier}}\]</span></p>
-<p>Or the appropriate representative port(s) for years prior to 1995.</p>
+<p><span class="math inline">\(P1\)</span> is the estimated proportion
+of all daily fishing activity that is detected during sampling shifts on
+a given sampling day. The reciprocal of <span class="math inline">\(P1\)</span> is used to adjust for this undetected
+fishing activity. <span class="math inline">\(P1\)</span> is retrieved
+from <em>G_BBS_P1</em> based on the domain determined by <a href="#year">YEAR</a>, <a href="#port_fk">PORT_FK</a>, and <a href="#method_fk">METHOD_FK</a>. Based on the value of <a href="#fishery_type">FISHERY_TYPE</a>, either the field
+<strong>CHARTER_P1</strong> (for <code>FISHERY_TYPE = “C”</code>) or
+<strong>NON_CHARTER_P1</strong> (for <code>FISHERY_TYPE = “N”</code>)
+will be used. If a value is not available in <em>G_BBS_P1</em>, default
+values for non-charter fishing are given as 0.98 for <strong>Agana Boat
+Basin</strong>, 0.95 for <strong>Agat Marina</strong>, and 0.8 for
+<strong>Merizo Pier</strong>. Any other default values are assumed to be
+1. For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), this is the
+average of <span class="math inline">\(P1\)</span> for the strata of the
+same method and charter status and with <strong>Agat Marina</strong> or
+<strong>Merizo Pier</strong>, or the appropriate representative port(s)
+for years prior to 1995.</p>
+<p>And <span class="math inline">\(P2\)</span> is the adjustment factor
+to account for trips outside of the three sampled ports, computed
+as:</p>
+<p><span class="math display">\[P2=\frac{\sum_{t=1}^{T}
+NUM\_VESSEL_t\  \text{if t is at an unsampled port}}{\sum_{t=1}^{T}
+NUM\_VESSEL_t\  \text{if t is at Agat Marina or Merizo
+Pier}}\]</span></p>
+<p>Or the appropriate representative port(s) for years prior to
+1995.</p>
 </div>
-<div id="sum_est_trip2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_est_trip2" class="anchor"></a><code>SUM_EST_TRIP2</code>
-</h2>
-<p>The sum of the estimated square number of trips, aggregated by sample date. For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), this is computed as:</p>
-<p><span class="math display">\[SUM\_EST\_TRIP2=\left(A1*A2*\frac{1}{P1}*P2\right)^2*\sum_{d=1}^{D}\left(\sum_{b=1}^{B}1\right)^2 \]</span></p>
-<p>Where <span class="math inline">\(b\)</span> includes fishing trips in the boat-log data from <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995. For other ports this is computed as:</p>
+<div class="section level3">
+<h3 id="sum_est_trip2">
+<code>SUM_EST_TRIP2</code><a class="anchor" aria-label="anchor" href="#sum_est_trip2"></a>
+</h3>
+<p>The sum of the estimated square number of trips, aggregated by sample
+date. For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), this is
+computed as:</p>
+<p><span class="math display">\[SUM\_EST\_TRIP2=\left(A1*A2*\frac{1}{P1}*P2\right)^2*\sum_{d=1}^{D}\left(\sum_{b=1}^{B}1\right)^2
+\]</span></p>
+<p>Where <span class="math inline">\(b\)</span> includes fishing trips
+in the boat-log data from <strong>Agat Marina</strong> and
+<strong>Merizo Pier</strong>, or the appropriate representative port(s)
+for years prior to 1995. For other ports this is computed as:</p>
 <p><span class="math display">\[SUM\_EST\_TRIP2=\left(A1*A2*\frac{1}{P1}\right)^2*\sum_{d=1}^{D}\left(\sum_{b=1}^{B}1\right)^2\]</span></p>
 </div>
-<div id="avg_est_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#avg_est_trip" class="anchor"></a><code>AVG_EST_TRIP</code>
-</h2>
-<p>The average estimated number of trips on sampling days for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="avg_est_trip">
+<code>AVG_EST_TRIP</code><a class="anchor" aria-label="anchor" href="#avg_est_trip"></a>
+</h3>
+<p>The average estimated number of trips on sampling days for the
+current domain. Computed as:</p>
 <p><span class="math display">\[AVG\_EST\_TRIP=\frac{SUM\_EST\_TRIP}{NUM\_SAMPLE\_DAYS}\]</span></p>
 </div>
-<div id="var_est_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_est_trip" class="anchor"></a><code>VAR_EST_TRIP</code>
-</h2>
-<p>The variance of the estimated number of trips per sampling day for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="var_est_trip">
+<code>VAR_EST_TRIP</code><a class="anchor" aria-label="anchor" href="#var_est_trip"></a>
+</h3>
+<p>The variance of the estimated number of trips per sampling day for
+the current domain. Computed as:</p>
 <p><span class="math display">\[ VAR\_EST\_TRIP=
 \frac{SUM\_EST\_TRIP2\ - \frac{SUM\_EST\_TRIP^2}{NUM\_SAMPLE\_DAYS} }
 {NUM\_SAMPLE\_DAYS * (NUM\_SAMPLE\_DAYS-1)} \]</span></p>
 </div>
-<div id="std_est_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_est_trip" class="anchor"></a><code>STD_EST_TRIP</code>
-</h2>
-<p>The coefficient of variation of the average number of trips per sampling days for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="std_est_trip">
+<code>STD_EST_TRIP</code><a class="anchor" aria-label="anchor" href="#std_est_trip"></a>
+</h3>
+<p>The coefficient of variation of the average number of trips per
+sampling days for the current domain. Computed as:</p>
 <p><span class="math display">\[STD\_EST\_TRIP=100*\frac{\sqrt{VAR\_EST\_TRIP}}{AVG\_EST\_TRIP}\]</span></p>
 </div>
-<div id="cpue_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cpue_trip" class="anchor"></a><code>CPUE_TRIP</code>
-</h2>
-<p>The average catch-per-trip from interviews for the current domain. Measured in kg/trip and computed as:</p>
+<div class="section level3">
+<h3 id="cpue_trip">
+<code>CPUE_TRIP</code><a class="anchor" aria-label="anchor" href="#cpue_trip"></a>
+</h3>
+<p>The average catch-per-trip from interviews for the current domain.
+Measured in kg/trip and computed as:</p>
 <p><span class="math display">\[CPUE\_TRIP=\frac{SUM\_TOT\_KGS}{NUM\_INTERVIEW}\]</span></p>
 </div>
-<div id="var_cpue_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_cpue_trip" class="anchor"></a><code>VAR_CPUE_TRIP</code>
-</h2>
-<p>The variance of the catch-per-trip from interviews for the current domain. Measured in (kg/trip)<span class="math inline">\(^2\)</span> and computed as:</p>
-<p><span class="math display">\[VAR\_CPUE\_TRIP=\frac{ SUM\_TOT\_KGS2 - \frac{SUM\_TOT\_KGS^2} {NUM\_INTERVIEW}}{NUM\_INTERVIEW * (NUM\_INTERVIEW-1)}\]</span></p>
+<div class="section level3">
+<h3 id="var_cpue_trip">
+<code>VAR_CPUE_TRIP</code><a class="anchor" aria-label="anchor" href="#var_cpue_trip"></a>
+</h3>
+<p>The variance of the catch-per-trip from interviews for the current
+domain. Measured in (kg/trip)<span class="math inline">\(^2\)</span> and
+computed as:</p>
+<p><span class="math display">\[VAR\_CPUE\_TRIP=\frac{ SUM\_TOT\_KGS2 -
+\frac{SUM\_TOT\_KGS^2} {NUM\_INTERVIEW}}{NUM\_INTERVIEW *
+(NUM\_INTERVIEW-1)}\]</span></p>
 </div>
-<div id="std_cpue_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_cpue_trip" class="anchor"></a><code>STD_CPUE_TRIP</code>
-</h2>
-<p>The coefficient of variation of the catch-per-trip from interviews for the current domain. Measured in kg/trip and computed as:</p>
-<p><span class="math display">\[STD\_CPUE\_TRIP= 100*\frac{\sqrt{VAR\_CPUE\_TRIP}} {CPUE\_TRIP}\]</span></p>
+<div class="section level3">
+<h3 id="std_cpue_trip">
+<code>STD_CPUE_TRIP</code><a class="anchor" aria-label="anchor" href="#std_cpue_trip"></a>
+</h3>
+<p>The coefficient of variation of the catch-per-trip from interviews
+for the current domain. Measured in kg/trip and computed as:</p>
+<p><span class="math display">\[STD\_CPUE\_TRIP=
+100*\frac{\sqrt{VAR\_CPUE\_TRIP}} {CPUE\_TRIP}\]</span></p>
 </div>
-<div id="cpue_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cpue_hour" class="anchor"></a><code>CPUE_HOUR</code>
-</h2>
-<p>The average catch-per-hour from interviews for the current domain. Measured in kg/hr and computed as:</p>
+<div class="section level3">
+<h3 id="cpue_hour">
+<code>CPUE_HOUR</code><a class="anchor" aria-label="anchor" href="#cpue_hour"></a>
+</h3>
+<p>The average catch-per-hour from interviews for the current domain.
+Measured in kg/hr and computed as:</p>
 <p><span class="math display">\[CPUE\_HOUR=\frac{SUM\_TOT\_KGS}{SUM\_HOUR}\]</span></p>
 </div>
-<div id="var_cpue_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_cpue_hour" class="anchor"></a><code>VAR_CPUE_HOUR</code>
-</h2>
-<p>The variance of the catch-per-hour from interviews for the current domain. Measured in (kg/hr)<span class="math inline">\(^2\)</span> and computed as:</p>
+<div class="section level3">
+<h3 id="var_cpue_hour">
+<code>VAR_CPUE_HOUR</code><a class="anchor" aria-label="anchor" href="#var_cpue_hour"></a>
+</h3>
+<p>The variance of the catch-per-hour from interviews for the current
+domain. Measured in (kg/hr)<span class="math inline">\(^2\)</span> and
+computed as:</p>
 <p><span class="math display">\[
 \begin{aligned}
-&amp; VAR\_CPUE\_HOUR\ = \\ 
+&amp; VAR\_CPUE\_HOUR\ = \\
 &amp; \frac{CPUE\_TRIP^2}{AVG\_HOUR^2}\ *\\
-&amp; \left( \frac{VAR\_CPUE\_TRIP}{CPUE\_TRIP^2} - 2*\frac{COV\_TO\_KGS\_HOUR}{CPUE\_TRIP*AVG\_HOUR} +  \frac{VAR\_AVG\_HOUR}{AVG\_HOUR^2} \right) \\
+&amp; \left( \frac{VAR\_CPUE\_TRIP}{CPUE\_TRIP^2} -
+2*\frac{COV\_TO\_KGS\_HOUR}{CPUE\_TRIP*AVG\_HOUR}
++  \frac{VAR\_AVG\_HOUR}{AVG\_HOUR^2} \right) \\
 \end{aligned}
 \]</span></p>
 <p>where:</p>
@@ -577,126 +749,157 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 \begin{aligned}
 &amp; COV\_TOT\_KGS\_HOUR= \\
 &amp; \frac{1}{(NUM\_INTERVIEW-1)} \\
-&amp; *\sum_{i=1}^I(HOURS\_FISHED_i-AVG\_HOUR)*(TOT\_EST\_KGS_i-AVG\_TOT\_KGS)\\
+&amp;
+*\sum_{i=1}^I(HOURS\_FISHED_i-AVG\_HOUR)*(TOT\_EST\_KGS_i-AVG\_TOT\_KGS)\\
 \end{aligned}
 \]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="std_cpue_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_cpue_hour" class="anchor"></a><code>STD_CPUE_HOUR</code>
-</h2>
-<p>The coefficient of variation of the catch-per-hour from interviews for the current domain. Measured in kg/hr and computed as:</p>
+<div class="section level3">
+<h3 id="std_cpue_hour">
+<code>STD_CPUE_HOUR</code><a class="anchor" aria-label="anchor" href="#std_cpue_hour"></a>
+</h3>
+<p>The coefficient of variation of the catch-per-hour from interviews
+for the current domain. Measured in kg/hr and computed as:</p>
 <p><span class="math display">\[STD\_CPUE\_HOUR=100*\frac{\sqrt{VAR\_CPUE\_HOUR}}{CPUE\_HOUR}\]</span></p>
 </div>
-<div id="cpue_gear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cpue_gear" class="anchor"></a><code>CPUE_GEAR</code>
-</h2>
-<p>The average catch-per-gear from interviews for the current domain. Measured in kg/gear and computed as:</p>
-<p><span class="math display">\[CPUE\_GEAR = \frac{SUM\_TOT\_KGS}{SUM\_GEAR}\]</span></p>
+<div class="section level3">
+<h3 id="cpue_gear">
+<code>CPUE_GEAR</code><a class="anchor" aria-label="anchor" href="#cpue_gear"></a>
+</h3>
+<p>The average catch-per-gear from interviews for the current domain.
+Measured in kg/gear and computed as:</p>
+<p><span class="math display">\[CPUE\_GEAR =
+\frac{SUM\_TOT\_KGS}{SUM\_GEAR}\]</span></p>
 </div>
-<div id="var_cpue_gear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_cpue_gear" class="anchor"></a><code>VAR_CPUE_GEAR</code>
-</h2>
-<p>The variance of the catch-per-gear from interviews for the current domain. Measured in (kg/gear)<span class="math inline">\(^2\)</span> and computed as:</p>
+<div class="section level3">
+<h3 id="var_cpue_gear">
+<code>VAR_CPUE_GEAR</code><a class="anchor" aria-label="anchor" href="#var_cpue_gear"></a>
+</h3>
+<p>The variance of the catch-per-gear from interviews for the current
+domain. Measured in (kg/gear)<span class="math inline">\(^2\)</span> and
+computed as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp; VAR\_CPUE\_GEAR \\
 &amp;= \ \frac{CPUE\_TRIP^2}{AVG\_GEAR^2}\ *\\
-&amp;\ \left(\frac{VAR\_CPUE\_TRIP}{CPUE\_TRIP^2}-2*\frac{COV\_TOT\_KGS\_GEAR}{CPUE\_TRIP*AVG\_GEAR}+\frac{VAR\_AVG\_GEAR}{AVG\_GEAR^2} \right)\\
+&amp;\
+\left(\frac{VAR\_CPUE\_TRIP}{CPUE\_TRIP^2}-2*\frac{COV\_TOT\_KGS\_GEAR}{CPUE\_TRIP*AVG\_GEAR}+\frac{VAR\_AVG\_GEAR}{AVG\_GEAR^2}
+\right)\\
 \end{aligned}
 \]</span></p>
 <p>where:</p>
 <p><span class="math display">\[
 \begin{aligned}
-&amp; COV\_TOT\_KGS\_GEAR \\ 
-&amp;= \frac{1}{NUM\_INTERVIEW-1}\\ 
-&amp; * \sum_{i=1}^{I} (NUM\_GEAR_i-AVG\_GEAR)*(TOT\_EST\_KGS_i-AVG\_TOT\_KGS)\\
+&amp; COV\_TOT\_KGS\_GEAR \\
+&amp;= \frac{1}{NUM\_INTERVIEW-1}\\
+&amp; * \sum_{i=1}^{I}
+(NUM\_GEAR_i-AVG\_GEAR)*(TOT\_EST\_KGS_i-AVG\_TOT\_KGS)\\
 \end{aligned}
 \]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes interviews from <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995. <span class="math inline">\(TOT\_EST\_KGS\)</span> is the total catch weight from all species in catch interview <span class="math inline">\(i\)</span>.</p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes interviews from <strong>Agat
+Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate
+representative port(s) for years prior to 1995. <span class="math inline">\(TOT\_EST\_KGS\)</span> is the total catch weight
+from all species in catch interview <span class="math inline">\(i\)</span>.</p>
 </div>
-<div id="std_cpue_gear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_cpue_gear" class="anchor"></a><code>STD_CPUE_GEAR</code>
-</h2>
-<p>The coefficient of variation of the catch-per-gear from interviews for the current domain. Measured in kg/gear and computed as:</p>
-<p><span class="math display">\[STD\_CPUE\_GEAR=100 * \frac{\sqrt{VAR\_CPUE\_GEAR}}{CPUE\_GEAR}\]</span></p>
+<div class="section level3">
+<h3 id="std_cpue_gear">
+<code>STD_CPUE_GEAR</code><a class="anchor" aria-label="anchor" href="#std_cpue_gear"></a>
+</h3>
+<p>The coefficient of variation of the catch-per-gear from interviews
+for the current domain. Measured in kg/gear and computed as:</p>
+<p><span class="math display">\[STD\_CPUE\_GEAR=100 *
+\frac{\sqrt{VAR\_CPUE\_GEAR}}{CPUE\_GEAR}\]</span></p>
 </div>
-<div id="cpue_fisher_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cpue_fisher_hour" class="anchor"></a><code>CPUE_FISHER_HOUR</code>
-</h2>
-<p>The average catch-per-fisher-hour from interviews for the current domain. Measured in kg/(fisher * hour) and computed as:</p>
+<div class="section level3">
+<h3 id="cpue_fisher_hour">
+<code>CPUE_FISHER_HOUR</code><a class="anchor" aria-label="anchor" href="#cpue_fisher_hour"></a>
+</h3>
+<p>The average catch-per-fisher-hour from interviews for the current
+domain. Measured in kg/(fisher * hour) and computed as:</p>
 <p><span class="math display">\[CPUE\_FISHER\_HOUR=\frac{SUM\_TOT\_KGS}{SUM\_FISHER\_HOUR}\]</span></p>
 </div>
-<div id="var_cpue_fisher_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_cpue_fisher_hour" class="anchor"></a><code>VAR_CPUE_FISHER_HOUR</code>
-</h2>
-<p>The variance of the catch-per-fisher-hour from interviews for the current domain. Measured in (kg/(fisher * hour))2 and computed as:</p>
+<div class="section level3">
+<h3 id="var_cpue_fisher_hour">
+<code>VAR_CPUE_FISHER_HOUR</code><a class="anchor" aria-label="anchor" href="#var_cpue_fisher_hour"></a>
+</h3>
+<p>The variance of the catch-per-fisher-hour from interviews for the
+current domain. Measured in (kg/(fisher * hour))2 and computed as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp; VAR\_CPUE\_FISHER\_HOUR  \\
 &amp; = \frac{CPUE\_TRIP^2}{AVG\_FISHER\_HOUR^2} \\
-&amp; * \left( \frac{VAR\_CPUE\_TRIP}{CPUE\_TRIP^2} -2*  \frac{COV\_TOT\_KGS\_FISHER\_HOUR}{(CPUE\_TRIP*AVG\_FISHER\_HOUR)} 
+&amp; * \left( \frac{VAR\_CPUE\_TRIP}{CPUE\_TRIP^2}
+-2*  \frac{COV\_TOT\_KGS\_FISHER\_HOUR}{(CPUE\_TRIP*AVG\_FISHER\_HOUR)}
 \right. \nonumber \\
-&amp; \left. +\ \frac{VAR\_AVG\_FISHER\_HOUR}{AVG\_FISHER\_HOUR^2} \right)\\ 
+&amp; \left. +\ \frac{VAR\_AVG\_FISHER\_HOUR}{AVG\_FISHER\_HOUR^2}
+\right)\\
 \end{aligned}
 \]</span></p>
 <p>Where:</p>
 <p><span class="math display">\[
 \begin{aligned}
-&amp;COV\_TOT\_KGS\_FISHER\_HOUR  \\ 
-&amp;\ = \frac{1}{NUM\_INTERVIEW-1} &amp;\\ 
-&amp;\ * \sum_{i=1}^I(NUM\_FISHER_i*HOURS\_FISHED_i-AVG\_FISHER\_HOUR) \\
-&amp;\ * (TOT\_EST\_KGS_i-AVG\_TOT\_KGS) 
+&amp;COV\_TOT\_KGS\_FISHER\_HOUR  \\
+&amp;\ = \frac{1}{NUM\_INTERVIEW-1} &amp;\\
+&amp;\ * \sum_{i=1}^I(NUM\_FISHER_i*HOURS\_FISHED_i-AVG\_FISHER\_HOUR)
+\\
+&amp;\ * (TOT\_EST\_KGS_i-AVG\_TOT\_KGS)
 \end{aligned}
 \]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="std_cpue_fisher_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_cpue_fisher_hour" class="anchor"></a><code>STD_CPUE_FISHER_HOUR</code>
-</h2>
-<p>The coefficient of variation of the catch-per-fisher-hour from interviews for the current domain. Measured in kg/(fisher * hour) and computed as:</p>
+<div class="section level3">
+<h3 id="std_cpue_fisher_hour">
+<code>STD_CPUE_FISHER_HOUR</code><a class="anchor" aria-label="anchor" href="#std_cpue_fisher_hour"></a>
+</h3>
+<p>The coefficient of variation of the catch-per-fisher-hour from
+interviews for the current domain. Measured in kg/(fisher * hour) and
+computed as:</p>
 <p><span class="math display">\[STD\_CPUE\_FISHER\_HOUR=100*\frac{\sqrt{VAR\_CPUE\_FISHER\_HOUR}}{CPUE\_FISHER\_HOUR}\]</span></p>
 </div>
-<div id="exp_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exp_trip" class="anchor"></a><code>EXP_TRIP</code>
-</h2>
+<div class="section level3">
+<h3 id="exp_trip">
+<code>EXP_TRIP</code><a class="anchor" aria-label="anchor" href="#exp_trip"></a>
+</h3>
 <p>The expanded number of trips for the current domain. Computed as:</p>
-<p><span class="math display">\[ EXP\_TRIP=AVG\_EST\_TRIP*NUM\_CALENDAR\_DAYS \]</span></p>
+<p><span class="math display">\[
+EXP\_TRIP=AVG\_EST\_TRIP*NUM\_CALENDAR\_DAYS \]</span></p>
 </div>
-<div id="var_exp_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_exp_trip" class="anchor"></a><code>VAR_EXP_TRIP</code>
-</h2>
-<p>The variance of the expanded number of trips for the current domain. Computed as:</p>
-<p><span class="math display">\[ VAR\_EXP\_TRIP=VAR\_EST\_TRIP*NUM\_CALENDAR\_DAYS^2\]</span></p>
+<div class="section level3">
+<h3 id="var_exp_trip">
+<code>VAR_EXP_TRIP</code><a class="anchor" aria-label="anchor" href="#var_exp_trip"></a>
+</h3>
+<p>The variance of the expanded number of trips for the current domain.
+Computed as:</p>
+<p><span class="math display">\[
+VAR\_EXP\_TRIP=VAR\_EST\_TRIP*NUM\_CALENDAR\_DAYS^2\]</span></p>
 </div>
-<div id="std_exp_trip" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_exp_trip" class="anchor"></a><code>STD_EXP_TRIP</code>
-</h2>
-<p>The coefficient of variation of the expanded number of trips for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="std_exp_trip">
+<code>STD_EXP_TRIP</code><a class="anchor" aria-label="anchor" href="#std_exp_trip"></a>
+</h3>
+<p>The coefficient of variation of the expanded number of trips for the
+current domain. Computed as:</p>
 <p><span class="math display">\[STD\_EXP\_TRIP=100*\frac{\sqrt{VAR\_EXP\_TRIP}}{EXP\_TRIP}\]</span></p>
 </div>
-<div id="exp_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exp_hour" class="anchor"></a><code>EXP_HOUR</code>
-</h2>
-<p>The expanded number of fishing hours for the current domain. Measured in hours and computed as:</p>
+<div class="section level3">
+<h3 id="exp_hour">
+<code>EXP_HOUR</code><a class="anchor" aria-label="anchor" href="#exp_hour"></a>
+</h3>
+<p>The expanded number of fishing hours for the current domain. Measured
+in hours and computed as:</p>
 <p><span class="math display">\[EXP\_HOUR=AVG\_HOUR*EXP\_TRIP\]</span></p>
 </div>
-<div id="var_exp_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_exp_hour" class="anchor"></a><code>VAR_EXP_HOUR</code>
-</h2>
-<p>The variance of the expanded number of fishing hours for the current domain. Measured in hour2 and computed as:</p>
+<div class="section level3">
+<h3 id="var_exp_hour">
+<code>VAR_EXP_HOUR</code><a class="anchor" aria-label="anchor" href="#var_exp_hour"></a>
+</h3>
+<p>The variance of the expanded number of fishing hours for the current
+domain. Measured in hour2 and computed as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp; VAR\_EXP\_HOUR \\
@@ -705,25 +908,29 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 \end{aligned}
 \]</span></p>
 </div>
-<div id="std_exp_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_exp_hour" class="anchor"></a><code>STD_EXP_HOUR</code>
-</h2>
-<p>The coefficient of variation of the expanded number of fishing hours for the current domain. Measured in hours and computed as:</p>
-<p><span class="math display">\[ STD\_EXP\_HOUR=100*\frac{\sqrt{VAR\_EXP\_HOUR}}{EXP\_HOUR}\]</span></p>
+<div class="section level3">
+<h3 id="std_exp_hour">
+<code>STD_EXP_HOUR</code><a class="anchor" aria-label="anchor" href="#std_exp_hour"></a>
+</h3>
+<p>The coefficient of variation of the expanded number of fishing hours
+for the current domain. Measured in hours and computed as:</p>
+<p><span class="math display">\[
+STD\_EXP\_HOUR=100*\frac{\sqrt{VAR\_EXP\_HOUR}}{EXP\_HOUR}\]</span></p>
 </div>
-<div id="exp_fisher" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exp_fisher" class="anchor"></a><code>EXP_FISHER</code>
-</h2>
-<p>The expanded number of fishers for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="exp_fisher">
+<code>EXP_FISHER</code><a class="anchor" aria-label="anchor" href="#exp_fisher"></a>
+</h3>
+<p>The expanded number of fishers for the current domain. Computed
+as:</p>
 <p><span class="math display">\[EXP\_FISHER=AVG\_FISHER*EXP\_TRIP\]</span></p>
 </div>
-<div id="var_exp_fisher" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_exp_fisher" class="anchor"></a><code>VAR_EXP_FISHER</code>
-</h2>
-<p>The variance of the expanded number of fishers for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="var_exp_fisher">
+<code>VAR_EXP_FISHER</code><a class="anchor" aria-label="anchor" href="#var_exp_fisher"></a>
+</h3>
+<p>The variance of the expanded number of fishers for the current
+domain. Computed as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;VAR\_EXP\_FISHER \\
@@ -732,24 +939,27 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 \end{aligned}
 \]</span></p>
 </div>
-<div id="std_exp_fisher" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_exp_fisher" class="anchor"></a><code>STD_EXP_FISHER</code>
-</h2>
-<p>The coefficient of variation of the expanded number of fishers for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="std_exp_fisher">
+<code>STD_EXP_FISHER</code><a class="anchor" aria-label="anchor" href="#std_exp_fisher"></a>
+</h3>
+<p>The coefficient of variation of the expanded number of fishers for
+the current domain. Computed as:</p>
 <p><span class="math display">\[STD\_EXP\_FISHER=100*\frac{\sqrt{VAR\_EXP\_FISHER}}{EXP\_FISHER}\]</span></p>
 </div>
-<div id="exp_fisher_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exp_fisher_hour" class="anchor"></a><code>EXP_FISHER_HOUR</code>
-</h2>
-<p>The expanded number of fisher-hours for the current domain. Measured in fisher * hour and computed as: <span class="math display">\[EXP\_FISHER\_HOUR=AVG\_FISHER\_HOUR*EXP\_TRIP\]</span></p>
+<div class="section level3">
+<h3 id="exp_fisher_hour">
+<code>EXP_FISHER_HOUR</code><a class="anchor" aria-label="anchor" href="#exp_fisher_hour"></a>
+</h3>
+<p>The expanded number of fisher-hours for the current domain. Measured
+in fisher * hour and computed as: <span class="math display">\[EXP\_FISHER\_HOUR=AVG\_FISHER\_HOUR*EXP\_TRIP\]</span></p>
 </div>
-<div id="var_exp_fisher_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_exp_fisher_hour" class="anchor"></a><code>VAR_EXP_FISHER_HOUR</code>
-</h2>
-<p>The variance of the expanded number of fisher-hours for the current domain. Measured in (fisher * hour)^2 and computed as:</p>
+<div class="section level3">
+<h3 id="var_exp_fisher_hour">
+<code>VAR_EXP_FISHER_HOUR</code><a class="anchor" aria-label="anchor" href="#var_exp_fisher_hour"></a>
+</h3>
+<p>The variance of the expanded number of fisher-hours for the current
+domain. Measured in (fisher * hour)^2 and computed as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;VAR\_EXP\_FISHER\_HOUR \\
@@ -758,25 +968,29 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 \end{aligned}
 \]</span></p>
 </div>
-<div id="std_exp_fisher_hour" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_exp_fisher_hour" class="anchor"></a><code>STD_EXP_FISHER_HOUR</code>
-</h2>
-<p>The coefficient of variation of the expanded number of fisher-hours for the current domain. Measured in fisher * hour and computed as:</p>
+<div class="section level3">
+<h3 id="std_exp_fisher_hour">
+<code>STD_EXP_FISHER_HOUR</code><a class="anchor" aria-label="anchor" href="#std_exp_fisher_hour"></a>
+</h3>
+<p>The coefficient of variation of the expanded number of fisher-hours
+for the current domain. Measured in fisher * hour and computed as:</p>
 <p><span class="math display">\[STD\_EXP\_FISHER\_HOUR=100*\frac{\sqrt{VAR\_EXP\_FISHER\_HOUR}}{EXP\_FISHER\_HOUR}\]</span></p>
 </div>
-<div id="exp_gear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exp_gear" class="anchor"></a><code>EXP_GEAR</code>
-</h2>
-<p>The expanded number of fishing gears for the current domain. Computed as:</p>
-<p><span class="math display">\[ EXP\_GEAR=AVG\_GEAR*EXP\_TRIP \]</span></p>
+<div class="section level3">
+<h3 id="exp_gear">
+<code>EXP_GEAR</code><a class="anchor" aria-label="anchor" href="#exp_gear"></a>
+</h3>
+<p>The expanded number of fishing gears for the current domain. Computed
+as:</p>
+<p><span class="math display">\[ EXP\_GEAR=AVG\_GEAR*EXP\_TRIP
+\]</span></p>
 </div>
-<div id="var_exp_gear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_exp_gear" class="anchor"></a><code>VAR_EXP_GEAR</code>
-</h2>
-<p>The variance of the expanded number of fishing gears for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="var_exp_gear">
+<code>VAR_EXP_GEAR</code><a class="anchor" aria-label="anchor" href="#var_exp_gear"></a>
+</h3>
+<p>The variance of the expanded number of fishing gears for the current
+domain. Computed as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;VAR\_EXP\_GEAR\\
@@ -785,41 +999,53 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 \end{aligned}
 \]</span></p>
 </div>
-<div id="std_exp_gear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_exp_gear" class="anchor"></a><code>STD_EXP_GEAR</code>
-</h2>
-<p>The coefficient of variation of the expanded number of fishing gears for the current domain. Computed as:</p>
+<div class="section level3">
+<h3 id="std_exp_gear">
+<code>STD_EXP_GEAR</code><a class="anchor" aria-label="anchor" href="#std_exp_gear"></a>
+</h3>
+<p>The coefficient of variation of the expanded number of fishing gears
+for the current domain. Computed as:</p>
 <p><span class="math display">\[STD\_EXP\_GEAR=100*\frac{\sqrt{VAR\_EXP\_GEAR}}{EXP\_GEAR}\]</span></p>
 </div>
-<div id="exp_tot_kgs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exp_tot_kgs" class="anchor"></a><code>EXP_TOT_KGS</code>
-</h2>
-<p>The expanded catch for the current domain. Measured in kg and computed as:</p>
-<p><span class="math display">\[EXP\_TOT\_KGS=CPUE\_TRIP*EXP\_TRIP \]</span></p>
+<div class="section level3">
+<h3 id="exp_tot_kgs">
+<code>EXP_TOT_KGS</code><a class="anchor" aria-label="anchor" href="#exp_tot_kgs"></a>
+</h3>
+<p>The expanded catch for the current domain. Measured in kg and
+computed as:</p>
+<p><span class="math display">\[EXP\_TOT\_KGS=CPUE\_TRIP*EXP\_TRIP
+\]</span></p>
 </div>
-<div id="sum_tot_kgs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_tot_kgs" class="anchor"></a><code>SUM_TOT_KGS</code>
-</h2>
-<p>The total catch represented on interviews for the current domain. Measured in kg and computed as:</p>
+<div class="section level3">
+<h3 id="sum_tot_kgs">
+<code>SUM_TOT_KGS</code><a class="anchor" aria-label="anchor" href="#sum_tot_kgs"></a>
+</h3>
+<p>The total catch represented on interviews for the current domain.
+Measured in kg and computed as:</p>
 <p><span class="math display">\[SUM\_TOT\_KGS=\sum_{i=1}^{I}TOT\_EST\_KGS_i\]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="sum_tot_kgs2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sum_tot_kgs2" class="anchor"></a><code>SUM_TOT_KGS2</code>
-</h2>
-<p>The sum of squares of the catch represented on interviews for the current domain. Measured in <span class="math inline">\(kg^2\)</span> and computed as:</p>
-<p><span class="math display">\[SUM\_TOT\_KGS2=\sum_{i=1}^{I} TOT\_EST\_KGS_i^{\ 2}\]</span></p>
-<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong> and <strong>Merizo Pier</strong>, or the appropriate representative port(s) for years prior to 1995.</p>
+<div class="section level3">
+<h3 id="sum_tot_kgs2">
+<code>SUM_TOT_KGS2</code><a class="anchor" aria-label="anchor" href="#sum_tot_kgs2"></a>
+</h3>
+<p>The sum of squares of the catch represented on interviews for the
+current domain. Measured in <span class="math inline">\(kg^2\)</span>
+and computed as:</p>
+<p><span class="math display">\[SUM\_TOT\_KGS2=\sum_{i=1}^{I}
+TOT\_EST\_KGS_i^{\ 2}\]</span></p>
+<p>For non-sampled ports (<code>SURVEY_ZONE_FK = 24</code>), <span class="math inline">\(i\)</span> includes <strong>Agat Marina</strong>
+and <strong>Merizo Pier</strong>, or the appropriate representative
+port(s) for years prior to 1995.</p>
 </div>
-<div id="var_exp_tot_kgs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#var_exp_tot_kgs" class="anchor"></a><code>VAR_EXP_TOT_KGS</code>
-</h2>
-<p>The variance of the expanded catch for the current domain. Measured in kg^2 and computed as:</p>
+<div class="section level3">
+<h3 id="var_exp_tot_kgs">
+<code>VAR_EXP_TOT_KGS</code><a class="anchor" aria-label="anchor" href="#var_exp_tot_kgs"></a>
+</h3>
+<p>The variance of the expanded catch for the current domain. Measured
+in kg^2 and computed as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 &amp;VAR\_EXP\_TOT\_KGS\\
@@ -828,36 +1054,43 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 \end{aligned}
 \]</span></p>
 </div>
-<div id="std_exp_tot_kgs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#std_exp_tot_kgs" class="anchor"></a><code>STD_EXP_TOT_KGS</code>
-</h2>
-<p>The coefficient of variation of the expanded catch for the current domain. Measured in kg and computed as:</p>
+<div class="section level3">
+<h3 id="std_exp_tot_kgs">
+<code>STD_EXP_TOT_KGS</code><a class="anchor" aria-label="anchor" href="#std_exp_tot_kgs"></a>
+</h3>
+<p>The coefficient of variation of the expanded catch for the current
+domain. Measured in kg and computed as:</p>
 <p><span class="math display">\[STD\_EXP\_TOT\_KGS=100*\frac{\sqrt{VAR\_EXP\_TOT\_KGS}}{EXP\_TOT\_KGS}\]</span></p>
 <hr>
 </div>
 </div>
-<div id="fields-in-g_bbs_spc" class="section level1">
-<h1 class="hasAnchor">
-<a href="#fields-in-g_bbs_spc" class="anchor"></a>Fields in G_BBS_SPC</h1>
-<div id="spc_pk" class="section level2">
-<h2 class="hasAnchor">
-<a href="#spc_pk" class="anchor"></a><code>SPC_PK</code>
+<div class="section level2">
+<h2 id="fields-in-g_bbs_spc">Fields in G_BBS_SPC<a class="anchor" aria-label="anchor" href="#fields-in-g_bbs_spc"></a>
 </h2>
-<p>The private key associated with a particular species catch expansion. Consists of 23 characters of the form <code>PyyyyqqmmmmsssnnnnnDDCP</code>, determined as:</p>
+<div class="section level3">
+<h3 id="spc_pk">
+<code>SPC_PK</code><a class="anchor" aria-label="anchor" href="#spc_pk"></a>
+</h3>
+<p>The private key associated with a particular species catch expansion.
+Consists of 23 characters of the form
+<code>PyyyyqqmmmmsssnnnnnDDCP</code>, determined as:</p>
 <ul>
 <li>
 <code>P</code>: A single capital letter for PERIOD_TYPE</li>
 <li>
 <code>yyyy</code>: The four digits for YEAR</li>
 <li>
-<code>qq</code>: Two digits for QUARTER, with leading zeros if necessary</li>
+<code>qq</code>: Two digits for QUARTER, with leading zeros if
+necessary</li>
 <li>
-<code>mmmm</code>: Four digits for METHOD_FK, with leading zeros if necessary</li>
+<code>mmmm</code>: Four digits for METHOD_FK, with leading zeros if
+necessary</li>
 <li>
-<code>sss</code>: Three digits for SURVEY_ZONE_FK, with leading zeros if necessary</li>
+<code>sss</code>: Three digits for SURVEY_ZONE_FK, with leading
+zeros if necessary</li>
 <li>
-<code>nnnnn</code>: Five digits for SPECIES_FK, with leading zeros if necessary</li>
+<code>nnnnn</code>: Five digits for SPECIES_FK, with leading zeros
+if necessary</li>
 <li>
 <code>DD</code>: Two capital letters for TYPE_OF_DAY</li>
 <li>
@@ -866,22 +1099,27 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 <code>P</code>: A single letter for PROCESS_TYPE</li>
 </ul>
 </div>
-<div id="exp_fk" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exp_fk" class="anchor"></a><code>EXP_FK</code>
-</h2>
-<p>The foreign key associated with a particular domain expansion. Consists of 18 characters of the form <code>PyyyyqqmmmmsssDDCP</code>, determined as:</p>
+<div class="section level3">
+<h3 id="exp_fk">
+<code>EXP_FK</code><a class="anchor" aria-label="anchor" href="#exp_fk"></a>
+</h3>
+<p>The foreign key associated with a particular domain expansion.
+Consists of 18 characters of the form <code>PyyyyqqmmmmsssDDCP</code>,
+determined as:</p>
 <ul>
 <li>
 <code>P</code>: A single capital letter for PERIOD_TYPE</li>
 <li>
 <code>yyyy</code>: The four digits for YEAR</li>
 <li>
-<code>qq</code>: Two digits for QUARTER, with leading zeros if necessary</li>
+<code>qq</code>: Two digits for QUARTER, with leading zeros if
+necessary</li>
 <li>
-<code>mmmm</code>: Four digits for METHOD_FK, with leading zeros if necessary</li>
+<code>mmmm</code>: Four digits for METHOD_FK, with leading zeros if
+necessary</li>
 <li>
-<code>sss</code>: Three digits for SURVEY_ZONE_FK, with leading zeros if necessary</li>
+<code>sss</code>: Three digits for SURVEY_ZONE_FK, with leading
+zeros if necessary</li>
 <li>
 <code>DD</code>: Two capital letters for TYPE_OF_DAY</li>
 <li>
@@ -890,54 +1128,60 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 <code>P</code>: A single letter for PROCESS_TYPE</li>
 </ul>
 </div>
-<div id="species_fk" class="section level2">
-<h2 class="hasAnchor">
-<a href="#species_fk" class="anchor"></a><code>SPECIES_FK</code>
-</h2>
+<div class="section level3">
+<h3 id="species_fk">
+<code>SPECIES_FK</code><a class="anchor" aria-label="anchor" href="#species_fk"></a>
+</h3>
 <p>The foreign key associated with a particular species.</p>
 </div>
-<div id="num_interview-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_interview-1" class="anchor"></a><code>NUM_INTERVIEW</code>
-</h2>
-<p>The number of interviews of the current domain that included catch of the current species. Computed as:</p>
-<p><span class="math display">\[NUM\_INTERVIEW=\sum_{c=1}^C\ 1 \]</span></p>
+<div class="section level3">
+<h3 id="num_interview-1">
+<code>NUM_INTERVIEW</code><a class="anchor" aria-label="anchor" href="#num_interview-1"></a>
+</h3>
+<p>The number of interviews of the current domain that included catch of
+the current species. Computed as:</p>
+<p><span class="math display">\[NUM\_INTERVIEW=\sum_{c=1}^C\ 1
+\]</span></p>
 </div>
-<div id="kgs_caught" class="section level2">
-<h2 class="hasAnchor">
-<a href="#kgs_caught" class="anchor"></a><code>KGS_CAUGHT</code>
-</h2>
-<p>The estimated expanded catch for the current species <span class="math inline">\((s)\)</span> in the current domain. Measured in kg and computed as:</p>
+<div class="section level3">
+<h3 id="kgs_caught">
+<code>KGS_CAUGHT</code><a class="anchor" aria-label="anchor" href="#kgs_caught"></a>
+</h3>
+<p>The estimated expanded catch for the current species <span class="math inline">\((s)\)</span> in the current domain. Measured in kg
+and computed as:</p>
 <p><span class="math display">\[KGS\_CAUGHT=
-\frac{\sum_{c=1}^{C}EST\_KGS_{s,c} }{(\sum_{s=1}^S \sum_{c=1}^{C} EST\_KGS_(s,c)} )
+\frac{\sum_{c=1}^{C}EST\_KGS_{s,c} }{(\sum_{s=1}^S \sum_{c=1}^{C}
+EST\_KGS_(s,c)} )
 *EXP\_TOT\_LBS\]</span></p>
 </div>
-<div id="lbs_sold" class="section level2">
-<h2 class="hasAnchor">
-<a href="#lbs_sold" class="anchor"></a><code>LBS_SOLD</code>
-</h2>
+<div class="section level3">
+<h3 id="lbs_sold">
+<code>LBS_SOLD</code><a class="anchor" aria-label="anchor" href="#lbs_sold"></a>
+</h3>
 </div>
-<div id="num_kept" class="section level2">
-<h2 class="hasAnchor">
-<a href="#num_kept" class="anchor"></a><code>NUM_KEPT</code>
-</h2>
-<p>The number of specimens of the current species <span class="math inline">\((s)\)</span> that were recorded in interviews of the current domain. Computed as:</p>
-<p><span class="math display">\[NUM\_KEPT=\sum_{c=1}^{C}NUM\_KEPT_{s,c} \]</span></p>
+<div class="section level3">
+<h3 id="num_kept">
+<code>NUM_KEPT</code><a class="anchor" aria-label="anchor" href="#num_kept"></a>
+</h3>
+<p>The number of specimens of the current species <span class="math inline">\((s)\)</span> that were recorded in interviews of
+the current domain. Computed as:</p>
+<p><span class="math display">\[NUM\_KEPT=\sum_{c=1}^{C}NUM\_KEPT_{s,c}
+\]</span></p>
 </div>
-<div id="sys_create_time-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sys_create_time-1" class="anchor"></a><code>SYS_CREATE_TIME</code>
-</h2>
+<div class="section level3">
+<h3 id="sys_create_time-1">
+<code>SYS_CREATE_TIME</code><a class="anchor" aria-label="anchor" href="#sys_create_time-1"></a>
+</h3>
 </div>
-<div id="sys_modify_time-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sys_modify_time-1" class="anchor"></a><code>SYS_MODIFY_TIME</code>
-</h2>
+<div class="section level3">
+<h3 id="sys_modify_time-1">
+<code>SYS_MODIFY_TIME</code><a class="anchor" aria-label="anchor" href="#sys_modify_time-1"></a>
+</h3>
 </div>
-<div id="hash-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#hash-1" class="anchor"></a><code>HASH</code>
-</h2>
+<div class="section level3">
+<h3 id="hash-1">
+<code>HASH</code><a class="anchor" aria-label="anchor" href="#hash-1"></a>
+</h3>
 </div>
 </div>
   </div>
@@ -953,11 +1197,13 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 
 
       <footer><div class="copyright">
-  <p>Developed by Toby Mathews, Hongguang Ma, Felipe Carvalho, Eric Fletcher.</p>
+  <p></p>
+<p>Developed by Toby Mathews, Hongguang Ma, Felipe Carvalho, Eric Fletcher.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -965,6 +1211,8 @@ NUM\_UNKN\_FISHED\_TRIP &amp;= \\
 
   
 
+
+  
 
   </body>
 </html>
